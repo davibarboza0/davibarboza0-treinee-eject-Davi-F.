@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheKa - Cadastro</title>
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <main class="pagina-login pagina-cadastro">
+
+        <!-- PAINEL ESQUERDO (MARROM) -->
+        <section class="painel-ilustracao">
+            <svg viewBox="0 0 803 616" fill="none" xmlns="http://www.w3.org/2000/svg" class="ilustracao-laco" preserveAspectRatio="xMaxYMid meet">
+                <path d="M802.021 471.15C802.021 471.15 654.227 459.407 553.105 381.166C683.391 327.566 786.723 177.513 660.612 55.9135C526.381 -73.8364 324.832 40.8506 308.57 209.734C307.12 221.266 305.998 267.928 310.552 278.824C143.159 299.017 70.0488 254.842 70.0488 254.842L1.50068e-06 408.734L82.0958 430.345L82.1432 430.073C82.1432 430.073 83.185 430.535 83.4574 430.583C163.365 447.042 273.199 454.411 389.57 432.335C465.743 510.434 582.995 558.939 685.17 587.7C685.667 588.067 686.212 588.162 686.484 588.209L797.303 615.671L802.021 471.15ZM475 172.538C495.863 147.837 553.537 129.274 567.56 174.369C583.699 228.25 517.973 247.934 456.847 254.11C451.792 225.169 455.878 195.298 475 172.538Z" fill="#F78420"/>
+            </svg>
+            
+            <svg viewBox="0 0 357 443" fill="none" xmlns="http://www.w3.org/2000/svg" class="ilustracao-bota">
+                <path d="M335.137 144.755C304.23 175.827 284.996 241.123 278.092 275.71C277.554 278.405 274.981 280.18 272.274 279.707L213.201 269.406C212.667 269.313 212.123 269.302 211.592 269.407C203.771 270.961 186.582 279.12 174.206 301.055C132.216 385.43 79.7593 403.076 58.7801 401.352C-47.4807 395.009 -3.4122 260.167 31.9046 193.539C54.4401 139.191 109.724 28.5033 150.578 20.538C191.04 12.6491 259.61 82.4364 289.724 119.338C290.302 120.048 291.042 120.563 291.904 120.872L333.358 135.736C337.043 137.057 337.898 141.98 335.137 144.755Z" stroke="#C06616" stroke-width="20"/>
+                <path d="M291.176 119.298L332.784 136.324C336.042 137.657 336.949 141.854 334.665 144.532C308.248 175.486 289.619 224.125 277.529 275.799C276.921 278.395 274.4 280.078 271.774 279.62L213.766 269.505C211.352 269.084 209.586 266.988 209.718 264.541C212.423 214.342 252.246 135.766 270.26 106.219C271.961 103.43 275.836 103.126 278.032 105.545L289.367 118.031C289.868 118.583 290.486 119.016 291.176 119.298Z" fill="#C06616" stroke="#C06616"/>
+                <path d="M178.157 300.676L134.081 273.59C127.876 269.776 126.374 261.951 130.726 256.112C135.079 250.272 143.638 248.63 149.843 252.443L193.919 279.529L178.157 300.676Z" fill="#C06616"/>
+                <path d="M157.634 335.163L113.558 308.077C107.353 304.264 105.851 296.439 110.203 290.599C114.556 284.76 123.115 283.117 129.32 286.93L173.396 314.016L157.634 335.163Z" fill="#C06616"/>
+                <path d="M130.374 366.682L86.298 339.596C80.0928 335.783 78.5909 327.958 82.9435 322.118C87.2961 316.279 95.8548 314.636 102.06 318.449L146.136 345.535L130.374 366.682Z" fill="#C06616"/>
+            </svg>
+
+            <img 
+                src="./logoP.png" 
+                alt="Logo TheKa" 
+                class="logo"
+            >
+        </section>
+
+        <!-- PAINEL DIREITO (FORMULÁRIO BRANCO DE CADASTRO) -->
+        <section class="painel-login">
+            <div class="conteudo-login">
+
+                <h1>Cadastro</h1>
+
+                <form action="./index.html">
+                    <div class="campo">
+                        <label for="nome">Nome completo</label>
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            placeholder="Seu nome completo"
+                            autocomplete="name"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="email">E-mail</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="seuemail@email.com"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo campo-senha">
+                        <label for="senha">Senha</label>
+                        <div class="input-container">
+                            <input
+                                type="password"
+                                id="senha"
+                                name="senha"
+                                placeholder="********"
+                                autocomplete="new-password"
+                                required
+                            >
+                            <button type="button" class="btn-olho" aria-label="Mostrar senha">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F78420" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="campo campo-senha">
+                        <label for="confirmar-senha">Confirmar senha</label>
+                        <div class="input-container">
+                            <input
+                                type="password"
+                                id="confirmar-senha"
+                                name="confirmar-senha"
+                                placeholder="********"
+                                autocomplete="new-password"
+                                required
+                            >
+                            <button type="button" class="btn-olho" aria-label="Mostrar senha">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F78420" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grupo-botoes">
+                        <a href="./index.html" class="botao-voltar">Cancelar</a>
+                        <button type="submit" class="botao-login">Salvar</button>
+                    </div>
+                </form>
+
+            </div>
+        </section>
+
+    </main>
+</body>
+</html>

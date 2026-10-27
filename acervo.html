@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheKa - Acervo</title>
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./acervo.css">
+</head>
+<body>
+
+    <header class="header-container">
+        <!-- Wrapper e Mapeamento para Desktop (PC) -->
+        <div class="header-wrapper-desktop">
+            <img src="./cabecalhoacervocomputador.png" alt="Cabeçalho TheKa Acervo Desktop" class="cabecalho-desktop" draggable="false">
+            <div class="nav-overlay-desktop">
+                <a href="./acervo.html" class="link-overlay-logo" title="Acervo / Início"></a>
+                <a href="./acervo.html" class="link-overlay-acervo" title="Acervo"></a>
+                <a href="./sobrenos.html" class="link-overlay-sobrenos" title="Sobre nós"></a>
+                <a href="./index.html" class="link-overlay-usuario" title="Perfil do usuário"></a>
+            </div>
+        </div>
+
+        <!-- Wrapper e Mapeamento para Mobile (Celular) -->
+        <div class="header-wrapper-mobile">
+            <img src="./cabecalhoacervo.png" alt="Cabeçalho TheKa Acervo Mobile" class="cabecalho-mobile" draggable="false">
+            <div class="nav-overlay-mobile">
+                <a href="./acervo.html" class="link-overlay-logo" title="Acervo / Início"></a>
+                <a href="./acervo.html" class="link-overlay-acervo" title="Acervo"></a>
+                <a href="./sobrenos.html" class="link-overlay-sobrenos" title="Sobre nós"></a>
+                <a href="./index.html" class="link-overlay-usuario" title="Perfil do usuário"></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="conteudo-principal">
+
+        <!-- ==========================================
+             SEÇÃO NOVIDADES DA SEMANA (CARROSSEL)
+             ========================================== -->
+        <section class="novidades-secao">
+            <div class="novidades-info">
+                <h1>Novidades<br>da semana</h1>
+                <div class="destaque-detalhe">
+                    <h2>Nunca vi a chuva</h2>
+                    <p>Stefano Volp – 2023</p>
+                </div>
+            </div>
+
+            <div class="novidades-carrossel">
+                <div class="card-carrossel card-1" data-titulo="A cabeça do santo" data-autor="Socorro Acioli – 2014">
+                    <img src="./setad.png" alt="Seta selecionada" class="icone-seta-card img-seta-ativa" draggable="false">
+                    <img src="./setac.png" alt="Seta inativa" class="icone-seta-card img-seta-inativa" draggable="false">
+                </div>
+
+                <div class="card-carrossel card-2" data-titulo="A biblioteca da meia-noite" data-autor="Matt Haig – 2020">
+                    <img src="./setad.png" alt="Seta selecionada" class="icone-seta-card img-seta-ativa" draggable="false">
+                    <img src="./setac.png" alt="Seta inativa" class="icone-seta-card img-seta-inativa" draggable="false">
+                </div>
+
+                <div class="card-carrossel card-3 active" data-titulo="Nunca vi a chuva" data-autor="Stefano Volp – 2023">
+                    <img src="./setad.png" alt="Seta selecionada" class="icone-seta-card img-seta-ativa" draggable="false">
+                    <img src="./setac.png" alt="Seta inativa" class="icone-seta-card img-seta-inativa" draggable="false">
+                </div>
+
+                <div class="card-carrossel card-4" data-titulo="Canção para ninar menino grande" data-autor="Conceição Evaristo – 2022">
+                    <img src="./setad.png" alt="Seta selecionada" class="icone-seta-card img-seta-ativa" draggable="false">
+                    <img src="./setac.png" alt="Seta inativa" class="icone-seta-card img-seta-inativa" draggable="false">
+                </div>
+
+                <div class="card-carrossel card-5" data-titulo="Dança para desaparecer" data-autor="Socorro Acioli – 2023">
+                    <img src="./setad.png" alt="Seta selecionada" class="icone-seta-card img-seta-ativa" draggable="false">
+                    <img src="./setac.png" alt="Seta inativa" class="icone-seta-card img-seta-inativa" draggable="false">
+                </div>
+            </div>
+        </section>
+
+        <!-- ==========================================
+             SEÇÃO CATÁLOGO (BUSCA E FILTROS)
+             ========================================== -->
+        <section class="catalogo-secao">
+            <h2 class="titulo-secao">Veja nosso catálogo</h2>
+
+            <div class="container-busca-wrapper">
+                <div class="container-busca">
+                    <input type="text" placeholder="Fazer busca" class="input-busca">
+
+                    <button type="button" class="btn-buscar-icone" aria-label="Buscar">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                    </button>
+
+                    <div class="filtros-grupo-desktop">
+                        <select class="select-filtro">
+                            <option value="" disabled selected>Gênero</option>
+                            <option value="ficcao">Ficção</option>
+                            <option value="romance">Romance</option>
+                            <option value="fantasia">Fantasia</option>
+                        </select>
+
+                        <select class="select-filtro">
+                            <option value="" disabled selected>Editora</option>
+                            <option value="companhia">Companhia das Letras</option>
+                            <option value="intrinseca">Intrínseca</option>
+                        </select>
+
+                        <button class="btn-buscar">
+                            Buscar
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-filtro-mobile" id="btn-abrir-filtro-mobile" aria-label="Abrir filtros">
+                    <img src="./filtros.png" alt="Filtros" class="img-filtro-mobile" draggable="false">
+                </button>
+            </div>
+
+            <!-- Grelha de Livros do Catálogo -->
+            <div class="grid-container-relativo">
+                <div class="grid-catalogo">
+                    <div class="card-catalogo"><div class="card-overlay-hover"><img src="./sobreposicaolivro.png" alt="Sobreposição" class="img-sobreposicao-card" draggable="false"></div></div>
+                    <div class="card-catalogo"><div class="card-overlay-hover"><img src="./sobreposicaolivro.png" alt="Sobreposição" class="img-sobreposicao-card" draggable="false"></div></div>
+                    <div class="card-catalogo"><div class="card-overlay-hover"><img src="./sobreposicaolivro.png" alt="Sobreposição" class="img-sobreposicao-card" draggable="false"></div></div>
+                    <div class="card-catalogo"><div class="card-overlay-hover"><img src="./sobreposicaolivro.png" alt="Sobreposição" class="img-sobreposicao-card" draggable="false"></div></div>
+
+                    <!-- 5º Livro com o Botão + anexado -->
+                    <div class="card-catalogo">
+                        <div class="card-overlay-hover">
+                            <img src="./sobreposicaolivro.png" alt="Sobreposição" class="img-sobreposicao-card" draggable="false">
+                        </div>
+                        <button type="button" class="btn-flutuante-adicionar" id="btn-flutuante-adicionar" aria-label="Adicionar material">
+                            <span class="btn-texto">Adicionar material</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="card-catalogo"><div class="card-overlay-hover"><img src="./sobreposicaolivro.png" alt="Sobreposição" class="img-sobreposicao-card" draggable="false"></div></div>
+                    <div class="card-catalogo"><div class="card-overlay-hover"><img src="./sobreposicaolivro.png" alt="Sobreposição" class="img-sobreposicao-card" draggable="false"></div></div>
+                    <div class="card-catalogo"><div class="card-overlay-hover"><img src="./sobreposicaolivro.png" alt="Sobreposição" class="img-sobreposicao-card" draggable="false"></div></div>
+                    <div class="card-catalogo"><div class="card-overlay-hover"><img src="./sobreposicaolivro.png" alt="Sobreposição" class="img-sobreposicao-card" draggable="false"></div></div>
+                    <div class="card-catalogo"><div class="card-overlay-hover"><img src="./sobreposicaolivro.png" alt="Sobreposição" class="img-sobreposicao-card" draggable="false"></div></div>
+
+                    <div class="card-catalogo"><div class="card-overlay-hover"><img src="./sobreposicaolivro.png" alt="Sobreposição" class="img-sobreposicao-card" draggable="false"></div></div>
+                    <div class="card-catalogo"><div class="card-overlay-hover"><img src="./sobreposicaolivro.png" alt="Sobreposição" class="img-sobreposicao-card" draggable="false"></div></div>
+                    <div class="card-catalogo"><div class="card-overlay-hover"><img src="./sobreposicaolivro.png" alt="Sobreposição" class="img-sobreposicao-card" draggable="false"></div></div>
+                    <div class="card-catalogo"><div class="card-overlay-hover"><img src="./sobreposicaolivro.png" alt="Sobreposição" class="img-sobreposicao-card" draggable="false"></div></div>
+                    <div class="card-catalogo"><div class="card-overlay-hover"><img src="./sobreposicaolivro.png" alt="Sobreposição" class="img-sobreposicao-card" draggable="false"></div></div>
+                </div>
+            </div>
+
+            <div class="paginacao">
+                <button class="page-arrow" aria-label="Página anterior">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <span class="page-num">1</span>
+                <span class="page-num active">2</span>
+                <span class="page-num">3</span>
+                <button class="page-arrow" aria-label="Próxima página">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="rodape">
+        <div class="rodape-conteudo">
+            
+            <div class="coluna-rodape brand-coluna">
+                <img src="./imagemPacervo.png" alt="TheKa Logo" class="logo-rodape" draggable="false">
+                <p class="slogan-rodape">Aventuras literárias.</p>
+            </div>
+
+            <div class="coluna-rodape">
+                <h3>Contato</h3>
+                <ul>
+                    <li><img src="./telefone.png" alt="Telefone" class="icone-rodape" draggable="false">(84) 9 9999-2222</li>
+                    <li><img src="./site.png" alt="Site" class="icone-rodape" draggable="false">www.theka.com.br</li>
+                    <li><img src="./local.png" alt="Localização" class="icone-rodape" draggable="false">Natal, RN</li>
+                </ul>
+            </div>
+
+            <div class="coluna-rodape">
+                <h3>Redes sociais</h3>
+                <ul>
+                    <li><img src="./instagram.png" alt="Instagram" class="icone-rodape" draggable="false"><a href="#">@theka.biblioteca</a></li>
+                    <li><img src="./tiktok.png" alt="TikTok" class="icone-rodape" draggable="false"><a href="#">@theka.biblioteca</a></li>
+                    <li><img src="./twiter.png" alt="X / Twitter" class="icone-rodape" draggable="false"><a href="#">@theka.biblioteca</a></li>
+                </ul>
+            </div>
+
+            <div class="coluna-rodape">
+                <h3>Ajuda</h3>
+                <ul>
+                    <li><img src="./ajuda.png" alt="Central de ajuda" class="icone-rodape" draggable="false"><a href="#">Central de ajuda</a></li>
+                    <li><img src="./faq.png" alt="FAQ" class="icone-rodape" draggable="false"><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="rodape-creditos">
+            <p>Mockup desenvolvido por EJECT</p>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         MODAL 1: VER MAIS (DETALHES DO LIVRO)
+         ========================================== -->
+    <div id="modal-ver-mais" class="modal-overlay hidden">
+        <div class="modal-card modal-card-ver-mais">
+            <button type="button" class="btn-fechar-modal" id="btn-fechar-ver-mais" aria-label="Fechar">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#888888" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <div class="ver-mais-conteudo">
+                <div class="ver-mais-capa">
+                    <img src="./adicionarcapa.png" alt="Capa do livro" class="img-ver-mais-capa" draggable="false">
+                </div>
+
+                <div class="ver-mais-info">
+                    <h2 class="ver-mais-titulo">A cabeça do santo</h2>
+                    <p class="ver-mais-autor">Socorro Acioli, 2016</p>
+
+                    <p class="ver-mais-resumo">
+                        Um jovem que viaja para a cidade de Candeia para cumprir um pedido de sua mãe moribunda: encontrar o pai desconhecido.
+                    </p>
+
+                    <p class="ver-mais-paginas">páginas: 176</p>
+                    <p class="ver-mais-editora">Companhia das letras</p>
+
+                    <div class="ver-mais-acoes">
+                        <button type="button" id="btn-abrir-editar" class="btn-modal-img" aria-label="Editar">
+                            <img src="./editar.png" alt="Editar" class="img-btn-modal" draggable="false">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL 2: ADICIONAR MATERIAL
+         ========================================== -->
+    <div id="modal-adicionar" class="modal-overlay hidden">
+        <div class="modal-card">
+            
+            <!-- Cabeçalho Exato do Mobile (cabecalhoacervo.png) -->
+            <div class="modal-top-mobile">
+                <img src="./cabecalhoacervo.png" alt="Cabeçalho TheKa Mobile" class="cabecalho-mobile-modal" draggable="false">
+            </div>
+
+            <div class="modal-corpo-conteudo">
+                <h2 class="modal-titulo">Adicionar material ao catálogo</h2>
+
+                <form id="form-adicionar-material" class="modal-form">
+                    <div class="modal-conteudo">
+                        
+                        <div class="coluna-capa">
+                            <div class="caixa-capa-preview caixa-capa-mobile-style">
+                                <label for="input-capa" class="label-adicionar-capa" title="Clique para selecionar uma capa">
+                                    <!-- Imagem Padrão (Desktop) -->
+                                    <img src="./adicionarcapa.png" alt="Adicionar capa" class="img-adicionar-capa img-capa-desktop" id="preview-capa-img" draggable="false">
+
+                                    <!-- Placeholder exclusivo do Mobile -->
+                                    <div class="caixa-capa-placeholder-mobile">
+                                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.8">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                            <polyline points="21 15 16 10 5 21"></polyline>
+                                        </svg>
+                                        <div class="btn-adicionar-capa-pilula">
+                                            <span>Adicionar capa</span>
+                                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                                <polyline points="17 8 12 3 7 8"></polyline>
+                                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </label>
+                                <input type="file" id="input-capa" accept="image/*" class="input-file-oculto">
+                            </div>
+                        </div>
+
+                        <div class="coluna-inputs">
+                            <div class="form-linha">
+                                <div class="campo-grupo flex-full">
+                                    <label for="titulo">Título no material:</label>
+                                    <input type="text" id="titulo" placeholder="Inserir o título do material">
+                                </div>
+                            </div>
+
+                            <div class="form-linha form-linha-dupla-mobile">
+                                <div class="campo-grupo flex-1">
+                                    <label for="paginas">Número de páginas</label>
+                                    <input type="text" id="paginas" placeholder="000">
+                                </div>
+                                <div class="campo-grupo flex-1">
+                                    <label for="isbn">ISBM</label>
+                                    <input type="text" id="isbn" placeholder="xxxxxxx">
+                                </div>
+                            </div>
+
+                            <div class="form-linha">
+                                <div class="campo-grupo flex-full">
+                                    <label for="autor">Autor:</label>
+                                    <input type="text" id="autor" placeholder="Machado de Assis">
+                                </div>
+                            </div>
+
+                            <div class="form-linha form-linha-dupla-mobile">
+                                <div class="campo-grupo flex-1">
+                                    <label for="ano">Ano de publicação</label>
+                                    <input type="text" id="ano" placeholder="000">
+                                </div>
+                                <div class="campo-grupo flex-1">
+                                    <label for="editora">Editora</label>
+                                    <div class="select-modal-wrapper">
+                                        <select id="editora">
+                                            <option value="" disabled selected>Selecionar</option>
+                                            <option value="companhia">Companhia das Letras</option>
+                                            <option value="intrinseca">Intrínseca</option>
+                                            <option value="rocco">Rocco</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-linha">
+                                <div class="campo-grupo flex-full">
+                                    <label for="resumo">Resumo do material:</label>
+                                    <textarea id="resumo" rows="4" placeholder="Inserir um breve resumo do material."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botões de Ação Desktop -->
+                    <div class="modal-botoes modal-botoes-desktop">
+                        <button type="button" id="btn-cancelar-modal" class="btn-modal-img" aria-label="Cancelar">
+                            <img src="./cancelar.png" alt="Cancelar" class="img-btn-modal" draggable="false">
+                        </button>
+                        <button type="submit" class="btn-modal-img" aria-label="Salvar Material">
+                            <img src="./salvar.png" alt="Salvar" class="img-btn-modal" draggable="false">
+                        </button>
+                    </div>
+
+                    <!-- Botões de Ação Mobile -->
+                    <div class="modal-botoes-mobile-container">
+                        <button type="button" class="btn-pilula-outline id-btn-cancelar-add-mobile">Cancelar</button>
+                        <button type="submit" class="btn-pilula-solida">
+                            <span>Salvar</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Rodapé exclusivo para a visão Mobile em página inteira -->
+            <footer class="rodape modal-rodape-mobile">
+                <div class="rodape-conteudo">
+                    <div class="coluna-rodape brand-coluna">
+                        <img src="./imagemPacervo.png" alt="TheKa Logo" class="logo-rodape" draggable="false">
+                        <p class="slogan-rodape">Aventuras literárias.</p>
+                    </div>
+
+                    <div class="coluna-rodape">
+                        <h3>Contato</h3>
+                        <ul>
+                            <li><img src="./telefone.png" alt="Telefone" class="icone-rodape" draggable="false">(84) 9 9999-2222</li>
+                            <li><img src="./site.png" alt="Site" class="icone-rodape" draggable="false">www.theka.com.br</li>
+                            <li><img src="./local.png" alt="Localização" class="icone-rodape" draggable="false">Natal, RN</li>
+                        </ul>
+                    </div>
+
+                    <div class="coluna-rodape">
+                        <h3>Redes sociais</h3>
+                        <ul>
+                            <li><img src="./instagram.png" alt="Instagram" class="icone-rodape" draggable="false"><a href="#">@theka.biblioteca</a></li>
+                            <li><img src="./tiktok.png" alt="TikTok" class="icone-rodape" draggable="false"><a href="#">@theka.biblioteca</a></li>
+                            <li><img src="./twiter.png" alt="X / Twitter" class="icone-rodape" draggable="false"><a href="#">@theka.biblioteca</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="coluna-rodape">
+                        <h3>Ajuda</h3>
+                        <ul>
+                            <li><img src="./ajuda.png" alt="Central de ajuda" class="icone-rodape" draggable="false"><a href="#">Central de ajuda</a></li>
+                            <li><img src="./faq.png" alt="FAQ" class="icone-rodape" draggable="false"><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="rodape-creditos">
+                    <p>Mockup desenvolvido por EJECT</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- ==========================================
+         MODAL 3: EDITAR MATERIAL
+         ========================================== -->
+    <div id="modal-editar" class="modal-overlay hidden">
+        <div class="modal-card">
+            
+            <!-- Cabeçalho Exato do Mobile (cabecalhoacervo.png) -->
+            <div class="modal-top-mobile">
+                <img src="./cabecalhoacervo.png" alt="Cabeçalho TheKa Mobile" class="cabecalho-mobile-modal" draggable="false">
+            </div>
+
+            <div class="modal-corpo-conteudo">
+                <h2 class="modal-titulo">Editar material</h2>
+
+                <form id="form-editar-material" class="modal-form">
+                    <div class="modal-conteudo">
+                        
+                        <div class="coluna-capa">
+                            <div class="caixa-capa-preview">
+                                <img src="./adicionarcapa.png" alt="Capa do material" class="img-adicionar-capa" draggable="false">
+                            </div>
+                        </div>
+
+                        <div class="coluna-inputs">
+                            <div class="form-linha">
+                                <div class="campo-grupo flex-full">
+                                    <label for="edit-titulo">Título no material:</label>
+                                    <input type="text" id="edit-titulo" value="A cabeça do santo">
+                                </div>
+                            </div>
+
+                            <div class="form-linha form-linha-dupla-mobile">
+                                <div class="campo-grupo flex-1">
+                                    <label for="edit-paginas">Número de páginas</label>
+                                    <input type="text" id="edit-paginas" value="176">
+                                </div>
+                                <div class="campo-grupo flex-1">
+                                    <label for="edit-isbn">ISBM</label>
+                                    <input type="text" id="edit-isbn" value="123456789">
+                                </div>
+                            </div>
+
+                            <div class="form-linha">
+                                <div class="campo-grupo flex-full">
+                                    <label for="edit-autor">Autor:</label>
+                                    <input type="text" id="edit-autor" value="Socorro Acioli">
+                                </div>
+                            </div>
+
+                            <div class="form-linha form-linha-dupla-mobile">
+                                <div class="campo-grupo flex-1">
+                                    <label for="edit-ano">Ano de publicação</label>
+                                    <input type="text" id="edit-ano" value="2016">
+                                </div>
+                                <div class="campo-grupo flex-1">
+                                    <label for="edit-editora">Editora</label>
+                                    <div class="select-modal-wrapper">
+                                        <select id="edit-editora">
+                                            <option value="companhia" selected>Companhia das L...</option>
+                                            <option value="intrinseca">Intrínseca</option>
+                                            <option value="rocco">Rocco</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-linha">
+                                <div class="campo-grupo flex-full">
+                                    <label for="edit-resumo">Resumo do material:</label>
+                                    <textarea id="edit-resumo" rows="4">Um jovem que viaja para a cidade de Candeia para cumprir um pedido de sua mãe moribunda: encontrar o pai desconhecido.</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botões de Ação Desktop -->
+                    <div class="modal-botoes modal-botoes-editar modal-botoes-desktop">
+                        <button type="button" id="btn-deletar-modal" class="btn-modal-img" aria-label="Deletar">
+                            <img src="./deletar.png" alt="Deletar" class="img-btn-modal" draggable="false">
+                        </button>
+
+                        <div class="modal-botoes-grupo-direita">
+                            <button type="button" id="btn-cancelar-modal-editar" class="btn-modal-img" aria-label="Cancelar">
+                                <img src="./cancelar.png" alt="Cancelar" class="img-btn-modal" draggable="false">
+                            </button>
+                            <button type="submit" class="btn-modal-img" aria-label="Salvar">
+                                <img src="./salvar.png" alt="Salvar" class="img-btn-modal" draggable="false">
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Botões de Ação Mobile para Editar Material -->
+                    <div class="modal-botoes-editar-mobile-container">
+                        <div class="botoes-linha-superior-mobile">
+                            <button type="button" class="btn-pilula-solida btn-pilula-deletar">
+                                <span>Deletar</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                            </button>
+
+                            <button type="submit" class="btn-pilula-solida">
+                                <span>Salvar</span>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <button type="button" class="btn-pilula-outline btn-full-mobile id-btn-cancelar-edit-mobile">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Rodapé exclusivo para a visão Mobile em página inteira -->
+            <footer class="rodape modal-rodape-mobile">
+                <div class="rodape-conteudo">
+                    <div class="coluna-rodape brand-coluna">
+                        <img src="./imagemPacervo.png" alt="TheKa Logo" class="logo-rodape" draggable="false">
+                        <p class="slogan-rodape">Aventuras literárias.</p>
+                    </div>
+
+                    <div class="coluna-rodape">
+                        <h3>Contato</h3>
+                        <ul>
+                            <li><img src="./telefone.png" alt="Telefone" class="icone-rodape" draggable="false">(84) 9 9999-2222</li>
+                            <li><img src="./site.png" alt="Site" class="icone-rodape" draggable="false">www.theka.com.br</li>
+                            <li><img src="./local.png" alt="Localização" class="icone-rodape" draggable="false">Natal, RN</li>
+                        </ul>
+                    </div>
+
+                    <div class="coluna-rodape">
+                        <h3>Redes sociais</h3>
+                        <ul>
+                            <li><img src="./instagram.png" alt="Instagram" class="icone-rodape" draggable="false"><a href="#">@theka.biblioteca</a></li>
+                            <li><img src="./tiktok.png" alt="TikTok" class="icone-rodape" draggable="false"><a href="#">@theka.biblioteca</a></li>
+                            <li><img src="./twiter.png" alt="X / Twitter" class="icone-rodape" draggable="false"><a href="#">@theka.biblioteca</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="coluna-rodape">
+                        <h3>Ajuda</h3>
+                        <ul>
+                            <li><img src="./ajuda.png" alt="Central de ajuda" class="icone-rodape" draggable="false"><a href="#">Central de ajuda</a></li>
+                            <li><img src="./faq.png" alt="FAQ" class="icone-rodape" draggable="false"><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="rodape-creditos">
+                    <p>Mockup desenvolvido por EJECT</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- MODAL / POPUP DE FILTROS (MOBILE) -->
+    <div id="modal-filtro-mobile" class="modal-filtro-overlay hidden">
+        <div class="modal-filtro-card">
+            <h2 class="modal-filtro-titulo">Filtros</h2>
+
+            <div class="modal-filtro-campos">
+                <div class="select-modal-filtro-wrapper">
+                    <select class="select-modal-filtro">
+                        <option value="" disabled selected>Gênero</option>
+                        <option value="ficcao">Ficção</option>
+                        <option value="romance">Romance</option>
+                        <option value="fantasia">Fantasia</option>
+                    </select>
+                    <svg class="chevron-down-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+
+                <div class="select-modal-filtro-wrapper">
+                    <select class="select-modal-filtro">
+                        <option value="" disabled selected>Editora</option>
+                        <option value="companhia">Companhia das Letras</option>
+                        <option value="intrinseca">Intrínseca</option>
+                        <option value="rocco">Rocco</option>
+                    </select>
+                    <svg class="chevron-down-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="modal-filtro-acoes">
+                <button type="button" id="btn-aplicar-filtro-mobile" class="btn-aplicar-filtro">
+                    Filtrar
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="4" y1="21" x2="4" y2="14"></line>
+                        <line x1="4" y1="10" x2="4" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12" y2="3"></line>
+                        <line x1="20" y1="21" x2="20" y2="16"></line>
+                        <line x1="20" y1="12" x2="20" y2="3"></line>
+                        <line x1="1" y1="14" x2="7" y2="14"></line>
+                        <line x1="9" y1="8" x2="15" y2="8"></line>
+                        <line x1="17" y1="16" x2="23" y2="16"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script compilado a partir do acervo.ts -->
+    <script src="./acervo.js" defer></script>
+</body>
+</html>

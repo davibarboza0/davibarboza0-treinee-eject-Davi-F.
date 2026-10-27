@@ -1,0 +1,1322 @@
+:root {
+    --vinho-principal: #81013A;
+    --vinho-escuro: #5C001C;
+    --rosa-suave: #F87293;
+    --cinza-borda: #E0E0E0;
+    --cinza-fundo: #F4F4F4;
+    --texto-escuro: #2D2D2D;
+    --texto-secundario: #666666;
+    --branco: #FFFFFF;
+    --verde-livro: #2D7A4F;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--branco);
+    color: var(--texto-escuro);
+}
+
+img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+/* ==========================================================================
+   CABEÇALHO COM CAMADAS CLICÁVEIS (NAVEGAÇÃO)
+   ========================================================================== */
+
+.header-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 20px;
+    background-color: var(--branco);
+}
+
+.header-wrapper-desktop,
+.header-wrapper-mobile {
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.header-wrapper-desktop {
+    max-width: 960px;
+}
+
+.cabecalho-desktop,
+.cabecalho-mobile {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.header-wrapper-mobile {
+    display: none !important;
+}
+
+.nav-overlay-desktop,
+.nav-overlay-mobile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.nav-overlay-desktop a,
+.nav-overlay-mobile a {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display: block;
+    cursor: pointer;
+}
+
+.nav-overlay-desktop .link-overlay-logo { left: 0%; width: 10%; }
+.nav-overlay-desktop .link-overlay-acervo { left: 12%; width: 32%; }
+.nav-overlay-desktop .link-overlay-sobrenos { left: 44%; width: 42%; }
+.nav-overlay-desktop .link-overlay-usuario { left: 87%; width: 13%; }
+
+/* ==========================================================================
+   CONTEÚDO PRINCIPAL
+   ========================================================================== */
+
+.conteudo-principal {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 20px 20px 80px 20px;
+}
+
+.novidades-secao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 70px;
+}
+
+.novidades-info h1 {
+    font-size: 42px;
+    color: var(--vinho-principal);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 30px;
+}
+
+.destaque-detalhe h2 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--texto-escuro);
+}
+
+.destaque-detalhe p {
+    font-size: 14px;
+    color: var(--texto-secundario);
+    margin-top: 4px;
+}
+
+/* ==========================================================================
+   CARROSSEL ACORDEÃO
+   ========================================================================== */
+
+.novidades-carrossel {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    height: 300px;
+}
+
+.card-carrossel {
+    width: 60px;
+    height: 300px;
+    border-radius: 14px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: width 0.45s cubic-bezier(0.25, 1, 0.5, 1), transform 0.2s ease;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--verde-livro);
+}
+
+.card-carrossel:hover {
+    transform: translateY(-2px);
+}
+
+.card-carrossel.active {
+    width: 200px;
+}
+
+.icone-seta-card {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.img-seta-ativa {
+    display: none;
+}
+
+.img-seta-inativa {
+    display: block;
+}
+
+.card-carrossel.active .img-seta-ativa {
+    display: block;
+}
+
+.card-carrossel.active .img-seta-inativa {
+    display: none;
+}
+
+/* ==========================================================================
+   CATÁLOGO, BUSCA E FILTROS DESKTOP
+   ========================================================================== */
+
+.catalogo-secao {
+    width: 100%;
+}
+
+.titulo-secao {
+    font-size: 36px;
+    color: var(--vinho-principal);
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+.container-busca-wrapper {
+    width: 100%;
+    margin-bottom: 45px;
+}
+
+.container-busca {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1.5px solid var(--vinho-principal);
+    border-radius: 50px;
+    padding: 5px 6px 5px 22px;
+    background-color: var(--branco);
+}
+
+.input-busca {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    color: var(--texto-escuro);
+    background: transparent;
+}
+
+.input-busca::placeholder {
+    color: #A0A0A0;
+}
+
+.btn-buscar-icone {
+    display: none;
+}
+
+.filtros-grupo-desktop {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.select-filtro {
+    border: 1.5px solid var(--vinho-principal);
+    border-radius: 50px;
+    padding: 7px 18px;
+    font-size: 13px;
+    color: var(--vinho-principal);
+    background-color: var(--branco);
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-buscar {
+    background-color: var(--vinho-principal);
+    color: var(--branco);
+    border: none;
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.btn-buscar:hover {
+    opacity: 0.9;
+}
+
+.btn-filtro-mobile {
+    display: none;
+}
+
+.grid-container-relativo {
+    position: relative;
+    width: 100%;
+}
+
+.grid-catalogo {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 18px;
+    margin-bottom: 45px;
+}
+
+.card-catalogo {
+    width: 100%;
+    aspect-ratio: 2 / 2.9;
+    border-radius: 16px;
+    background-color: var(--verde-livro);
+    cursor: pointer;
+    transition: transform 0.25s ease;
+    position: relative;
+    overflow: visible;
+}
+
+.card-catalogo:hover {
+    transform: translateY(-4px);
+}
+
+/* ==========================================================================
+   SOBREPOSIÇÃO DO CARD NO HOVER
+   ========================================================================== */
+
+.card-overlay-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    transform: translateY(4px);
+    z-index: 5;
+    overflow: hidden;
+}
+
+.card-catalogo:hover .card-overlay-hover {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+.img-sobreposicao-card {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 16px;
+}
+
+/* --- BOTÃO FLUTUANTE EXPANSÍVEL (+) --- */
+.btn-flutuante-adicionar {
+    position: absolute;
+    right: -12px;
+    bottom: -18px;
+    height: 40px;
+    border-radius: 50px;
+    background-color: var(--vinho-principal);
+    color: var(--branco);
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    z-index: 10;
+    padding: 0 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: padding 2s cubic-bezier(0.25, 1, 0.5, 1),
+                background-color 0.4s ease,
+                box-shadow 0.4s ease;
+}
+
+.btn-flutuante-adicionar .btn-texto {
+    max-width: 0;
+    opacity: 0;
+    margin-right: 0;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    transition: max-width 2s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 1.5s ease 0.3s,
+                margin-right 2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-flutuante-adicionar svg { flex-shrink: 0; }
+
+.btn-flutuante-adicionar:hover {
+    padding: 0 18px;
+    background-color: var(--vinho-escuro);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+}
+
+.btn-flutuante-adicionar:hover .btn-texto {
+    max-width: 180px;
+    opacity: 1;
+    margin-right: 8px;
+}
+
+.paginacao {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.page-num {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--texto-secundario);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.page-num.active {
+    background-color: var(--vinho-principal);
+    color: var(--branco);
+}
+
+.page-arrow {
+    background-color: var(--rosa-suave);
+    color: var(--branco);
+    border: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* ==========================================================================
+   RODAPÉ
+   ========================================================================== */
+
+.rodape {
+    background-color: var(--vinho-principal);
+    color: var(--branco);
+    padding: 50px 20px 20px 20px;
+    width: 100%;
+}
+
+.rodape-conteudo {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding-bottom: 40px;
+}
+
+.coluna-rodape h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.coluna-rodape ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.coluna-rodape li, .coluna-rodape a {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.coluna-rodape a:hover { text-decoration: underline; }
+
+.brand-coluna {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.logo-rodape {
+    width: 237px;
+    height: 65.73px;
+    object-fit: contain;
+}
+
+.slogan-rodape {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.icone-rodape {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    display: block;
+}
+
+.rodape-creditos {
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 20px;
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+/* ==========================================================================
+   ESTILOS DAS JANELAS MODAIS (DESKTOP)
+   ========================================================================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.55);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    padding: 20px;
+}
+
+.modal-overlay.hidden { display: none !important; }
+
+.modal-card {
+    background-color: var(--branco);
+    border-radius: 28px;
+    padding: 36px 40px;
+    width: 100%;
+    max-width: 880px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.modal-top-mobile,
+.modal-rodape-mobile,
+.modal-botoes-mobile-container,
+.modal-botoes-editar-mobile-container,
+.caixa-capa-placeholder-mobile {
+    display: none;
+}
+
+.img-capa-desktop {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- DESIGN DESKTOP DO MODAL VER MAIS --- */
+.modal-card-ver-mais {
+    max-width: 650px;
+    padding: 30px 36px;
+    background-color: #F8F8F8;
+    border-radius: 24px;
+}
+
+.btn-fechar-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1.5px solid #D0D0D0;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.2s ease;
+}
+
+.btn-fechar-modal:hover {
+    background-color: #EFEFEF;
+}
+
+.ver-mais-conteudo {
+    display: flex;
+    gap: 28px;
+    align-items: stretch;
+}
+
+.ver-mais-capa {
+    width: 210px;
+    flex-shrink: 0;
+}
+
+.img-ver-mais-capa {
+    width: 100%;
+    height: 290px;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+}
+
+.ver-mais-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.ver-mais-titulo {
+    font-size: 26px;
+    font-weight: 800;
+    color: #000000;
+    margin-bottom: 2px;
+    line-height: 1.2;
+}
+
+.ver-mais-autor {
+    font-size: 16px;
+    font-weight: 700;
+    color: #666666;
+    margin-bottom: 18px;
+}
+
+.ver-mais-resumo {
+    font-size: 13px;
+    line-height: 1.45;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+.ver-mais-paginas {
+    font-size: 13px;
+    color: #444444;
+    margin-bottom: 12px;
+}
+
+.ver-mais-editora {
+    font-size: 16px;
+    font-weight: 700;
+    color: #888888;
+    margin-bottom: 20px;
+}
+
+.ver-mais-acoes {
+    margin-top: auto;
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* --- ELEMENTOS GERAIS DOS MODAIS DE ADICIONAR E EDITAR --- */
+.modal-titulo {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--vinho-principal);
+    margin-bottom: 28px;
+}
+
+.modal-conteudo {
+    display: flex;
+    gap: 28px;
+    margin-bottom: 24px;
+}
+
+.coluna-capa {
+    width: 210px;
+    flex-shrink: 0;
+}
+
+.caixa-capa-preview {
+    width: 100%;
+    height: 280px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.label-adicionar-capa {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.img-adicionar-capa {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.img-adicionar-capa:hover {
+    transform: scale(1.02);
+    filter: brightness(0.95);
+}
+
+.input-file-oculto { display: none; }
+
+.coluna-inputs {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-linha {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+.flex-1 { flex: 1; }
+.flex-2 { flex: 2; }
+.flex-full { width: 100%; }
+
+.campo-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.campo-grupo label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--vinho-principal);
+}
+
+.campo-grupo input,
+.campo-grupo textarea,
+.select-modal-wrapper select {
+    width: 100%;
+    border: 1.5px solid var(--vinho-principal);
+    border-radius: 30px;
+    padding: 9px 16px;
+    font-size: 13px;
+    color: var(--texto-escuro);
+    outline: none;
+    background-color: var(--branco);
+    font-family: inherit;
+}
+
+.campo-grupo textarea {
+    border-radius: 18px;
+    resize: vertical;
+}
+
+.campo-grupo input::placeholder,
+.campo-grupo textarea::placeholder { color: #A8A8A8; }
+
+.select-modal-wrapper { position: relative; }
+
+.select-modal-wrapper select {
+    appearance: none;
+    cursor: pointer;
+}
+
+.select-modal-wrapper::after {
+    content: '❯';
+    font-size: 11px;
+    color: var(--vinho-principal);
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    pointer-events: none;
+}
+
+/* BOTÕES IMAGEM DOS MODAIS (DESKTOP) */
+.modal-botoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.modal-botoes-editar {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-botoes-grupo-direita {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-modal-img {
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn-modal-img:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
+}
+
+.img-btn-modal {
+    height: 44px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* ==========================================================================
+   POPUP DE FILTROS DO CELULAR
+   ========================================================================== */
+
+.modal-filtro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    padding: 20px;
+}
+
+.modal-filtro-overlay.hidden { display: none !important; }
+
+.modal-filtro-card {
+    background-color: var(--branco);
+    border-radius: 28px;
+    padding: 28px 24px;
+    width: 100%;
+    max-width: 320px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.modal-filtro-titulo {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--vinho-principal);
+    margin-bottom: 22px;
+}
+
+.modal-filtro-campos {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.select-modal-filtro-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.select-modal-filtro {
+    width: 100%;
+    border: 2px solid var(--vinho-principal);
+    border-radius: 50px;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--vinho-principal);
+    background-color: var(--branco);
+    appearance: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.select-modal-filtro-wrapper .chevron-down-icon {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--vinho-principal);
+}
+
+.modal-filtro-acoes {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-aplicar-filtro {
+    background-color: var(--vinho-principal);
+    color: var(--branco);
+    border: none;
+    border-radius: 50px;
+    padding: 10px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.btn-aplicar-filtro:hover { opacity: 0.9; }
+
+/* ==========================================================================
+   RESPONSIVIDADE (MOBILE / TELAS ATÉ 768px)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .header-container { padding: 12px 10px; }
+    .header-wrapper-desktop { display: none !important; }
+    .header-wrapper-mobile { display: block !important; }
+
+    .nav-overlay-mobile .link-overlay-logo { left: 0%; width: 15%; }
+    .nav-overlay-mobile .link-overlay-acervo { left: 16%; width: 32%; }
+    .nav-overlay-mobile .link-overlay-sobrenos { left: 48%; width: 37%; }
+    .nav-overlay-mobile .link-overlay-usuario { left: 85%; width: 15%; }
+
+    .conteudo-principal { padding: 16px 16px 50px 16px; }
+
+    .novidades-secao {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        margin-bottom: 40px;
+    }
+
+    .novidades-info { display: contents; }
+
+    .novidades-info h1 {
+        order: 1;
+        font-size: 32px;
+        line-height: 1.1;
+        margin-bottom: 0;
+    }
+
+    .novidades-carrossel {
+        order: 2;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        gap: 10px;
+    }
+
+    .card-carrossel {
+        width: 100% !important;
+        height: 60px;
+    }
+
+    .card-carrossel.active { height: 280px; }
+
+    .destaque-detalhe {
+        order: 3;
+        margin-top: 6px;
+    }
+
+    .destaque-detalhe h2 {
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--texto-escuro);
+    }
+
+    .destaque-detalhe p {
+        font-size: 15px;
+        color: var(--texto-secundario);
+        margin-top: 2px;
+    }
+
+    .titulo-secao {
+        font-size: 30px;
+        margin-bottom: 16px;
+    }
+
+    .container-busca-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 30px;
+    }
+
+    .container-busca {
+        flex: 1;
+        border: 2px solid var(--vinho-principal);
+        border-radius: 50px;
+        padding: 4px 6px 4px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .input-busca {
+        font-size: 15px;
+        width: 100%;
+    }
+
+    .btn-buscar-icone {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background-color: var(--vinho-principal);
+        color: var(--branco);
+        border: none;
+        cursor: pointer;
+        flex-shrink: 0;
+    }
+
+    .filtros-grupo-desktop { display: none !important; }
+
+    .btn-filtro-mobile {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background-color: var(--vinho-principal);
+        border: none;
+        cursor: pointer;
+        flex-shrink: 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .img-filtro-mobile {
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+    }
+
+    .grid-catalogo {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-bottom: 30px;
+    }
+
+    .paginacao { justify-content: center; }
+
+    .rodape { padding: 35px 16px 20px 16px; }
+
+    .rodape-conteudo {
+        flex-direction: column;
+        gap: 24px;
+        padding-bottom: 30px;
+    }
+
+    .logo-rodape {
+        width: 180px;
+        height: auto;
+    }
+
+    /* ==========================================================================
+       PÁGINAS INTEIRAS MOBILE (MODAIS DE ADICIONAR E EDITAR)
+       ========================================================================== */
+    .modal-overlay {
+        padding: 0 !important;
+        background-color: #FFFFFF !important;
+        align-items: flex-start !important;
+        overflow-y: auto !important;
+    }
+
+    .modal-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 100vh !important;
+        max-height: none !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        background-color: #FFFFFF !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* TOPO COM A MESMA IMAGEM CABECALHOACERVO.PNG DO CELULAR */
+    .modal-top-mobile {
+        display: block !important;
+        width: 100%;
+        padding: 12px 10px 0 10px;
+        background-color: #FFFFFF;
+    }
+
+    .cabecalho-mobile-modal {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: contain;
+    }
+
+    .modal-corpo-conteudo {
+        padding: 16px 20px 40px 20px;
+        flex: 1;
+    }
+
+    .modal-titulo {
+        font-size: 28px;
+        font-weight: 800;
+        line-height: 1.15;
+        color: var(--vinho-principal);
+        margin-bottom: 24px;
+    }
+
+    .modal-conteudo {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .coluna-capa {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .caixa-capa-preview {
+        width: 100%;
+        max-width: 260px;
+        height: 280px;
+        border-radius: 20px;
+        margin: 0 auto;
+    }
+
+    .caixa-capa-mobile-style {
+        background-color: #A3A3A3;
+    }
+
+    .img-capa-desktop {
+        display: none;
+    }
+
+    .caixa-capa-placeholder-mobile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Exibe pré-visualização ao carregar imagem */
+    .caixa-capa-preview.tem-imagem .img-capa-desktop {
+        display: block !important;
+    }
+
+    .caixa-capa-preview.tem-imagem .caixa-capa-placeholder-mobile {
+        display: none !important;
+    }
+
+    .btn-adicionar-capa-pilula {
+        background-color: rgba(255, 255, 255, 0.35);
+        color: var(--branco);
+        border-radius: 50px;
+        padding: 8px 18px;
+        font-size: 13px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        backdrop-filter: blur(4px);
+    }
+
+    /* FORMULÁRIO COM DADOS LADO A LADO */
+    .form-linha-dupla-mobile {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+
+    .form-linha-dupla-mobile .campo-grupo {
+        flex: 1 !important;
+    }
+
+    .modal-botoes-desktop {
+        display: none !important;
+    }
+
+    /* BOTÕES MOBILE EM PILULA */
+    .modal-botoes-mobile-container {
+        display: flex !important;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 12px;
+        margin-top: 28px;
+    }
+
+    .btn-pilula-outline {
+        background: transparent;
+        border: 1.5px solid var(--vinho-principal);
+        color: var(--vinho-principal);
+        border-radius: 50px;
+        padding: 10px 24px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-pilula-solida {
+        background-color: var(--vinho-principal);
+        color: var(--branco);
+        border: none;
+        border-radius: 50px;
+        padding: 10px 22px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        justify-content: center;
+    }
+
+    /* BOTÕES DO EDITAR MATERIAL NO MOBILE (2 LINHAS) */
+    .modal-botoes-editar-mobile-container {
+        display: flex !important;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 28px;
+        width: 100%;
+    }
+
+    .botoes-linha-superior-mobile {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .botoes-linha-superior-mobile .btn-pilula-solida {
+        flex: 1;
+    }
+
+    .btn-pilula-deletar {
+        background-color: var(--vinho-principal);
+    }
+
+    .btn-full-mobile {
+        width: 100% !important;
+    }
+
+    .modal-rodape-mobile {
+        display: block !important;
+        margin-top: 40px;
+    }
+
+    /* LAYOUT DO MODAL VER MAIS NO TELEMÓVEL */
+    .modal-card-ver-mais {
+        max-width: 340px !important;
+        padding: 0 !important;
+        overflow: hidden;
+        border-radius: 24px !important;
+        background-color: #F8F8F8 !important;
+        min-height: auto !important;
+        margin: auto !important;
+    }
+
+    .btn-fechar-modal {
+        top: 12px;
+        right: 12px;
+        background-color: rgba(255, 255, 255, 0.85);
+        border: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+        z-index: 20;
+    }
+
+    .ver-mais-conteudo {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .ver-mais-capa {
+        width: 100%;
+        height: 220px;
+    }
+
+    .img-ver-mais-capa {
+        width: 100%;
+        height: 100%;
+        border-radius: 24px 24px 0 0;
+        object-fit: cover;
+        object-position: top center;
+    }
+
+    .ver-mais-info {
+        padding: 20px 20px 24px 20px;
+    }
+
+    .ver-mais-titulo {
+        font-size: 24px;
+    }
+
+    .ver-mais-autor {
+        font-size: 15px;
+        margin-bottom: 14px;
+    }
+
+    .ver-mais-resumo {
+        font-size: 13px;
+        line-height: 1.4;
+        margin-bottom: 18px;
+    }
+
+    .ver-mais-paginas {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .ver-mais-editora {
+        font-size: 15px;
+        margin-bottom: 16px;
+    }
+}

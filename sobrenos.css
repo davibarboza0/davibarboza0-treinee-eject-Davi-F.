@@ -1,0 +1,511 @@
+:root {
+    --vinho-principal: #81013A;
+    --vinho-escuro: #5C001C;
+    --magenta-hero: #BF0259;
+    --amarelo-destaque: #F8C200;
+    --rosa-suave: #F87293;
+    --cinza-borda: #E0E0E0;
+    --cinza-fundo: #F4F4F4;
+    --texto-escuro: #2D2D2D;
+    --texto-secundario: #666666;
+    --branco: #FFFFFF;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--branco);
+    color: var(--texto-escuro);
+}
+
+/* DESABILITA ARRASTAR IMAGENS */
+img {
+    -webkit-user-drag: none;
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+/* ==========================================================================
+   CABEÇALHO HERO - DESKTOP
+   ========================================================================== */
+
+.secao-hero-sobrenos {
+    position: relative;
+    width: 100%;
+    background-color: transparent;
+}
+
+.hero-wrapper-desktop {
+    position: relative;
+    width: 100%;
+    background-color: var(--magenta-hero);
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    overflow: hidden;
+}
+
+.banner-sobrenos {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+}
+
+.navbar-container-desktop {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 88%;
+    max-width: 850px;
+    z-index: 10;
+}
+
+.navbar-imagem {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.link-nav {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display: block;
+    cursor: pointer;
+}
+
+.link-acervo {
+    left: 12%;
+    width: 32%;
+}
+
+.link-sobrenos {
+    left: 44%;
+    width: 42%;
+}
+
+.hero-wrapper-mobile {
+    display: none;
+}
+
+/* ==========================================================================
+   SEÇÕES DE CONTEÚDO (DESKTOP ORIGINAL)
+   ========================================================================== */
+
+.secao-objetivos {
+    width: 100%;
+    padding: 35px 0 10px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.imagem-objetivos {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.objetivos-desktop {
+    display: block;
+}
+
+.objetivos-mobile-container {
+    display: none;
+}
+
+.conteudo-principal {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 40px 20px 80px 20px;
+}
+
+.secao-historia {
+    margin-bottom: 70px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.imagem-historia {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 24px;
+}
+
+.historia-desktop {
+    display: block;
+}
+
+.historia-mobile {
+    display: none !important;
+}
+
+.secao-valores {
+    margin-bottom: 70px;
+}
+
+.titulo-secao {
+    font-size: 32px;
+    color: var(--vinho-principal);
+    font-weight: 800;
+    margin-bottom: 30px;
+}
+
+.valores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.card-valor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagem-valor {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.imagem-valor-clicavel {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.imagem-valor-clicavel:hover {
+    transform: scale(1.03);
+}
+
+/* EQUIPE DESKTOP (ORIGINAL) */
+.secao-equipe {
+    margin-bottom: 40px;
+}
+
+.equipe-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.card-equipe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagem-equipe {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
+.imagem-equipe-clicavel {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.imagem-equipe-clicavel:hover {
+    transform: scale(1.03);
+}
+
+/* ==========================================================================
+   RODAPÉ
+   ========================================================================== */
+
+.rodape {
+    background-color: var(--vinho-principal);
+    color: var(--branco);
+    padding: 50px 20px 20px 20px;
+    width: 100%;
+}
+
+.rodape-conteudo {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding-bottom: 40px;
+}
+
+.coluna-rodape h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.coluna-rodape ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.coluna-rodape li, .coluna-rodape a {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.coluna-rodape a:hover {
+    text-decoration: underline;
+}
+
+.brand-coluna {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.logo-rodape {
+    width: 237px;
+    height: 65.73px;
+    object-fit: contain;
+}
+
+.slogan-rodape {
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.icone-rodape {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    display: block;
+}
+
+.rodape-creditos {
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    padding-top: 20px;
+    font-size: 11px;
+    opacity: 0.6;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (MOBILE / TELAS ATÉ 768px)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .hero-wrapper-desktop {
+        display: none !important;
+    }
+
+    .hero-wrapper-mobile {
+        display: block !important;
+        width: 100%;
+    }
+
+    .card-hero-mobile {
+        background-color: var(--magenta-hero);
+        border-bottom-left-radius: 32px;
+        border-bottom-right-radius: 32px;
+        padding: 20px 0 36px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .nav-mobile-container {
+        position: relative;
+        width: 100%;
+        max-width: 361px;
+        display: flex;
+        justify-content: center;
+        padding: 0 16px;
+    }
+
+    .svg-navbar-top {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .link-nav-mob {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        display: block;
+    }
+
+    .link-acervo-mob {
+        left: 0%;
+        width: 50%;
+    }
+
+    .link-sobrenos-mob {
+        left: 50%;
+        width: 50%;
+    }
+
+    .ilustracao-mobile-container {
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        margin: 0;
+    }
+
+    .svg-ilustracao-hero {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .info-mobile-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 0 20px;
+    }
+
+    .svg-logo-texto-amarelo {
+        width: 150px;
+        height: auto;
+        display: block;
+    }
+
+    .texto-descricao-mobile {
+        color: var(--branco);
+        font-size: 14px;
+        line-height: 1.45;
+        font-weight: 400;
+        text-align: left;
+    }
+
+    /* SEÇÃO OBJETIVOS MOBILE */
+    .secao-objetivos {
+        padding: 20px 0 10px 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .objetivos-desktop {
+        display: none !important;
+    }
+
+    .objetivos-mobile-container {
+        display: flex !important;
+        justify-content: center;
+        width: 100%;
+        padding: 0 16px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .svg-objetivos-mobile {
+        width: 100%;
+        max-width: 377px;
+        min-width: 300px;
+        height: auto;
+        display: block;
+    }
+
+    .conteudo-principal {
+        padding: 24px 16px 50px 16px;
+    }
+
+    /* CARD NOSSA HISTÓRIA MOBILE */
+    .secao-historia {
+        margin-bottom: 40px;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .historia-desktop {
+        display: none !important;
+    }
+
+    .historia-mobile {
+        display: block !important;
+        width: 100%;
+        max-width: 361px;
+        height: auto;
+        aspect-ratio: 361 / 629;
+        border-radius: 28px;
+        object-fit: contain;
+        margin: 0 auto;
+    }
+
+    .secao-valores {
+        margin-bottom: 40px;
+    }
+
+    .titulo-secao {
+        font-size: 26px;
+        margin-bottom: 20px;
+    }
+
+    .valores-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    /* EQUIPE APENAS NO MOBILE (286px x 325px) */
+    .equipe-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .card-equipe {
+        width: 286px;
+        height: 325px;
+    }
+
+    .imagem-equipe {
+        width: 286px;
+        height: 325px;
+        object-fit: cover;
+        border-radius: 20px;
+    }
+
+    .rodape {
+        padding: 35px 16px 20px 16px;
+    }
+
+    .rodape-conteudo {
+        flex-direction: column;
+        gap: 24px;
+        padding-bottom: 30px;
+    }
+
+    .logo-rodape {
+        width: 180px;
+        height: auto;
+    }
+}

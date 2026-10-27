@@ -1,0 +1,399 @@
+:root {
+    --marrom: #7A3B05;
+    --laranja: #F78420;
+    --branco: #FFFFFF;
+    --texto-label: #F78420;
+    --placeholder: #F78420;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--marrom);
+}
+
+/* ==========================================================================
+   ESTRUTURA GERAL DAS PÁGINAS DE LOGIN / AUTENTICAÇÃO
+   ========================================================================== */
+
+.pagina-login {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+.imagem-mensagem-topo {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    max-width: 420px;
+    width: 35vw;
+    height: auto;
+    object-fit: contain;
+    z-index: 100;
+    pointer-events: none;
+}
+
+/* PAINEL ESQUERDO (MARROM) */
+.painel-ilustracao {
+    flex: 1;
+    height: 100vh;
+    background-color: var(--marrom);
+    position: relative; 
+    overflow: hidden;
+}
+
+/* ELEMENTOS DA PÁGINA DE LOGIN PRINCIPAL - DESKTOP (index.html) */
+.ilustracao-laco {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-55%);
+    width: 80%;
+    max-width: 580px;
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.ilustracao-bota {
+    position: absolute;
+    left: min(500px, 68%);
+    top: 50%;
+    transform: rotate(-8deg);
+    width: min(270px, 37%);
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.logo {
+    position: absolute;
+    width: 245px;
+    height: 67.95px;
+    bottom: 50px;
+    left: 93px;
+    object-fit: contain;
+    z-index: 10;
+}
+
+/* PAINEL DIREITO (BRANCO) - FORMULÁRIO */
+.painel-login {
+    width: 42%;
+    min-width: 420px;
+    height: 100vh;
+    background-color: var(--branco);
+    border-top-left-radius: 40px;
+    border-bottom-left-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    z-index: 10;
+}
+
+.conteudo-login {
+    width: 100%;
+    max-width: 320px;
+}
+
+.conteudo-login h1 {
+    color: var(--laranja);
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+/* CAMPOS DE ENTRADA (INPUTS) */
+.campo {
+    margin-bottom: 25px;
+}
+
+.campo label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--texto-label);
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.campo input {
+    width: 100%;
+    height: 38px;
+    padding: 0 20px;
+    border: 1.5px solid var(--laranja);
+    border-radius: 50px;
+    font-size: 13px;
+    color: var(--laranja);
+    outline: none;
+    background-color: var(--branco);
+}
+
+.campo input::placeholder {
+    color: var(--placeholder);
+    opacity: 1;
+}
+
+.btn-olho {
+    position: absolute;
+    right: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* AÇÕES, LINKS E BOTÕES */
+.acoes-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.link-laranja {
+    color: var(--laranja);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.link-laranja:hover {
+    text-decoration: underline;
+}
+
+.container-botao {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.grupo-botoes {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 35px;
+}
+
+.botao-voltar {
+    background-color: transparent;
+    color: var(--laranja);
+    border: 1.5px solid var(--laranja);
+    border-radius: 50px;
+    padding: 9px 24px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.botao-voltar:hover {
+    background-color: rgba(247, 132, 32, 0.08);
+}
+
+.botao-login {
+    background-color: var(--laranja);
+    color: var(--branco);
+    border: none;
+    border-radius: 50px;
+    padding: 10px 28px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.botao-login:hover {
+    opacity: 0.9;
+}
+
+/* ==========================================================================
+   CONFIGURAÇÃO ESPECÍFICA DAS PÁGINAS COM SVG
+   (Recuperar Senha, Cadastro e Redefinir Senha) - DESKTOP
+   ========================================================================== */
+
+.pagina-recuperar-senha .ilustracao-laco,
+.pagina-cadastro .ilustracao-laco,
+.pagina-redefinir-senha .ilustracao-laco {
+    position: absolute;
+    top: 82px;
+    right: 0;
+    left: auto;
+    width: 563px;
+    height: 432px;
+    aspect-ratio: 803 / 616;
+    max-width: none;
+    transform: none;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.pagina-recuperar-senha .ilustracao-bota,
+.pagina-cadastro .ilustracao-bota,
+.pagina-redefinir-senha .ilustracao-bota {
+    position: absolute;
+    top: 190px;
+    right: 500px;
+    left: auto;
+    width: 245px;
+    height: auto;
+    aspect-ratio: 357 / 443;
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (DISPOSITIVOS MÓVEIS / TELAS ATÉ 768px)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .pagina-login {
+        flex-direction: column;
+        align-items: stretch;
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+        background-color: var(--marrom);
+    }
+
+    .imagem-mensagem-topo {
+        display: none;
+    }
+
+    /* PAINEL SUPERIOR (ILUSTRAÇÃO MÓVEL) */
+    .painel-ilustracao {
+        width: 100%;
+        height: 390px;
+        min-height: 390px;
+        position: relative;
+        overflow: hidden;
+        flex: none;
+    }
+
+    /* Laço no Login Principal Móvel (index.html) */
+    .pagina-login:not(.pagina-recuperar-senha):not(.pagina-cadastro):not(.pagina-redefinir-senha) .ilustracao-laco {
+        width: 257.34px;
+        height: 375.27px;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        transform: none;
+        object-fit: contain;
+    }
+
+    /* Bota no Login Principal Móvel */
+    .pagina-login:not(.pagina-recuperar-senha):not(.pagina-cadastro):not(.pagina-redefinir-senha) .ilustracao-bota {
+        position: absolute;
+        width: 143.78px;
+        height: 180.11px;
+        top: 185.59px;
+        left: 228px;
+        transform: none;
+        object-fit: contain;
+    }
+
+    /* Páginas SVG em Móvel (Recuperar Senha, Cadastro e Redefinir Senha) */
+    .pagina-recuperar-senha .ilustracao-laco,
+    .pagina-cadastro .ilustracao-laco,
+    .pagina-redefinir-senha .ilustracao-laco {
+        position: absolute;
+        width: 299.98px;
+        height: 437.45px;
+        top: -40px;
+        left: 118.89px;
+        right: auto;
+        transform: none;
+    }
+
+    /* Bota subida em 70px (top ajustado para 85.62px) */
+    .pagina-recuperar-senha .ilustracao-bota,
+    .pagina-cadastro .ilustracao-bota,
+    .pagina-redefinir-senha .ilustracao-bota {
+        position: absolute;
+        width: 167.6px;
+        height: 209.95px;
+        top: 85.62px;
+        left: auto;
+        right: auto;
+        transform: none;
+        object-fit: contain;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    /* PAINEL INFERIOR DO FORMULÁRIO BRANCO */
+    .painel-login {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        min-height: calc(100vh - 370px);
+        min-width: unset;
+        border-radius: 32px 32px 0 0;
+        padding: 35px 28px 50px 28px;
+        margin-top: -20px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .conteudo-login {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .conteudo-login h1 {
+        font-size: 34px;
+        margin-bottom: 28px;
+    }
+
+    /* ALINHAMENTO CENTRADO DE BOTÕES E LINKS NO MÓVEL */
+    .acoes-links {
+        align-items: center;
+        text-align: center;
+        gap: 12px;
+        margin-top: 28px;
+        margin-bottom: 28px;
+    }
+
+    .container-botao {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .grupo-botoes {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .botao-login {
+        padding: 12px 42px;
+        font-size: 15px;
+    }
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TheKa - Login</title>
+    <link rel="stylesheet" href="./reset.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <main class="pagina-login">
+
+        <section class="painel-ilustracao">
+            <img 
+                src="./laçoLogo.png" 
+                alt="Ilustração do Laço TheKa" 
+                class="ilustracao-laco"
+            >
+            <img 
+                src="./botalaço.png" 
+                alt="Ilustração Bota TheKa" 
+                class="ilustracao-bota"
+            >
+            <img 
+                src="./logoP.png" 
+                alt="Logo TheKa" 
+                class="logo"
+            >
+        </section>
+
+        <section class="painel-login">
+            <div class="conteudo-login">
+
+                <h1>Login</h1>
+
+                <form action="./acervo.html">
+                    <div class="campo">
+                        <label for="email">E-mail</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="seuemail@email.com"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo campo-senha">
+                        <label for="senha">Senha</label>
+                        <div class="input-container">
+                            <input
+                                type="password"
+                                id="senha"
+                                name="senha"
+                                placeholder="********"
+                                autocomplete="current-password"
+                                required
+                            >
+                            <button type="button" class="btn-olho" aria-label="Mostrar senha">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F78420" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="acoes-links">
+                        <a href="./recuperar-senha.html" class="link-laranja">Esqueceu a senha?</a>
+                        <a href="./cadastro.html" class="link-laranja">Ainda não tem cadastro?</a>
+                    </div>
+
+                    <div class="container-botao">
+                        <button type="submit" class="botao-login">Entrar</button>
+                    </div>
+                </form>
+
+            </div>
+        </section>
+
+    </main>
+</body>
+</html>
