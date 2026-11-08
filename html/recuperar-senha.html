@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheKa - Cadastro</title>
-    <link rel="stylesheet" href="./reset.css">
-    <link rel="stylesheet" href="./style.css">
+    <title>TheKa - Recuperar Senha</title>
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <main class="pagina-login pagina-cadastro">
+    <main class="pagina-login pagina-recuperar-senha">
 
-        <!-- PAINEL ESQUERDO (MARROM) -->
         <section class="painel-ilustracao">
             <svg viewBox="0 0 803 616" fill="none" xmlns="http://www.w3.org/2000/svg" class="ilustracao-laco" preserveAspectRatio="xMaxYMid meet">
                 <path d="M802.021 471.15C802.021 471.15 654.227 459.407 553.105 381.166C683.391 327.566 786.723 177.513 660.612 55.9135C526.381 -73.8364 324.832 40.8506 308.57 209.734C307.12 221.266 305.998 267.928 310.552 278.824C143.159 299.017 70.0488 254.842 70.0488 254.842L1.50068e-06 408.734L82.0958 430.345L82.1432 430.073C82.1432 430.073 83.185 430.535 83.4574 430.583C163.365 447.042 273.199 454.411 389.57 432.335C465.743 510.434 582.995 558.939 685.17 587.7C685.667 588.067 686.212 588.162 686.484 588.209L797.303 615.671L802.021 471.15ZM475 172.538C495.863 147.837 553.537 129.274 567.56 174.369C583.699 228.25 517.973 247.934 456.847 254.11C451.792 225.169 455.878 195.298 475 172.538Z" fill="#F78420"/>
@@ -25,31 +24,18 @@
             </svg>
 
             <img 
-                src="./logoP.png" 
+                src="../imagens/logoP.png" 
                 alt="Logo TheKa" 
                 class="logo"
             >
         </section>
 
-        <!-- PAINEL DIREITO (FORMULÁRIO BRANCO DE CADASTRO) -->
         <section class="painel-login">
             <div class="conteudo-login">
 
-                <h1>Cadastro</h1>
+                <h1>Recuperar Senha</h1>
 
-                <form action="./index.html">
-                    <div class="campo">
-                        <label for="nome">Nome completo</label>
-                        <input
-                            type="text"
-                            id="nome"
-                            name="nome"
-                            placeholder="Seu nome completo"
-                            autocomplete="name"
-                            required
-                        >
-                    </div>
-
+                <form action="./redefinir-senha.html">
                     <div class="campo">
                         <label for="email">E-mail</label>
                         <input
@@ -62,49 +48,9 @@
                         >
                     </div>
 
-                    <div class="campo campo-senha">
-                        <label for="senha">Senha</label>
-                        <div class="input-container">
-                            <input
-                                type="password"
-                                id="senha"
-                                name="senha"
-                                placeholder="********"
-                                autocomplete="new-password"
-                                required
-                            >
-                            <button type="button" class="btn-olho" aria-label="Mostrar senha">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F78420" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="campo campo-senha">
-                        <label for="confirmar-senha">Confirmar senha</label>
-                        <div class="input-container">
-                            <input
-                                type="password"
-                                id="confirmar-senha"
-                                name="confirmar-senha"
-                                placeholder="********"
-                                autocomplete="new-password"
-                                required
-                            >
-                            <button type="button" class="btn-olho" aria-label="Mostrar senha">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F78420" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
                     <div class="grupo-botoes">
-                        <a href="./index.html" class="botao-voltar">Cancelar</a>
-                        <button type="submit" class="botao-login">Salvar</button>
+                        <a href="./index.html" class="botao-voltar">Voltar</a>
+                        <button type="submit" class="botao-login">Enviar</button>
                     </div>
                 </form>
 

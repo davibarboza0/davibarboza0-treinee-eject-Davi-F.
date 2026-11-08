@@ -1,14 +1,15 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 // ==========================================
 // 1. LÓGICA DO MODAL (ADICIONAR MATERIAL)
 // ==========================================
 function inicializarModalAdicionar() {
     const modalAdicionar = document.getElementById('modal-adicionar');
-    const btnFlutuante = document.getElementById('btn-flutuante-adicionar');
-    const btnCancelarDesktop = document.getElementById('btn-cancelar-modal');
-    const btnCancelarMobile = document.querySelector('.id-btn-cancelar-add-mobile');
-    if (btnFlutuante && modalAdicionar) {
-        btnFlutuante.addEventListener('click', (evento) => {
+    const botaoFlutuante = document.getElementById('btn-flutuante-adicionar');
+    const botaoCancelarDesktop = document.getElementById('btn-cancelar-modal');
+    const botaoCancelarMobile = document.querySelector('.id-btn-cancelar-add-mobile');
+    if (botaoFlutuante && modalAdicionar) {
+        botaoFlutuante.addEventListener('click', (evento) => {
             evento.stopPropagation();
             evento.preventDefault();
             modalAdicionar.classList.remove('hidden');
@@ -18,10 +19,10 @@ function inicializarModalAdicionar() {
         evento.preventDefault();
         modalAdicionar?.classList.add('hidden');
     };
-    if (btnCancelarDesktop)
-        btnCancelarDesktop.addEventListener('click', fecharModal);
-    if (btnCancelarMobile)
-        btnCancelarMobile.addEventListener('click', fecharModal);
+    if (botaoCancelarDesktop)
+        botaoCancelarDesktop.addEventListener('click', fecharModal);
+    if (botaoCancelarMobile)
+        botaoCancelarMobile.addEventListener('click', fecharModal);
     if (modalAdicionar) {
         modalAdicionar.addEventListener('click', (evento) => {
             if (evento.target === modalAdicionar) {
@@ -36,10 +37,10 @@ function inicializarModalAdicionar() {
 function inicializarModaisVerMaisEEditar() {
     const modalVerMais = document.getElementById('modal-ver-mais');
     const modalEditar = document.getElementById('modal-editar');
-    const btnFecharVerMais = document.getElementById('btn-fechar-ver-mais');
-    const btnAbrirEditar = document.getElementById('btn-abrir-editar');
-    const btnCancelarEditarDesktop = document.getElementById('btn-cancelar-modal-editar');
-    const btnCancelarEditarMobile = document.querySelector('.id-btn-cancelar-edit-mobile');
+    const botaoFecharVerMais = document.getElementById('btn-fechar-ver-mais');
+    const botaoAbrirEditar = document.getElementById('btn-abrir-editar');
+    const botaoCancelarEditarDesktop = document.getElementById('btn-cancelar-modal-editar');
+    const botaoCancelarEditarMobile = document.querySelector('.id-btn-cancelar-edit-mobile');
     const cardsCatalogo = document.querySelectorAll('.card-catalogo');
     cardsCatalogo.forEach(card => {
         card.addEventListener('click', (evento) => {
@@ -52,13 +53,13 @@ function inicializarModaisVerMaisEEditar() {
             }
         });
     });
-    if (btnFecharVerMais && modalVerMais) {
-        btnFecharVerMais.addEventListener('click', () => {
+    if (botaoFecharVerMais && modalVerMais) {
+        botaoFecharVerMais.addEventListener('click', () => {
             modalVerMais.classList.add('hidden');
         });
     }
-    if (btnAbrirEditar && modalVerMais && modalEditar) {
-        btnAbrirEditar.addEventListener('click', () => {
+    if (botaoAbrirEditar && modalVerMais && modalEditar) {
+        botaoAbrirEditar.addEventListener('click', () => {
             modalVerMais.classList.add('hidden');
             modalEditar.classList.remove('hidden');
         });
@@ -67,10 +68,10 @@ function inicializarModaisVerMaisEEditar() {
         evento.preventDefault();
         modalEditar?.classList.add('hidden');
     };
-    if (btnCancelarEditarDesktop)
-        btnCancelarEditarDesktop.addEventListener('click', fecharModalEditar);
-    if (btnCancelarEditarMobile)
-        btnCancelarEditarMobile.addEventListener('click', fecharModalEditar);
+    if (botaoCancelarEditarDesktop)
+        botaoCancelarEditarDesktop.addEventListener('click', fecharModalEditar);
+    if (botaoCancelarEditarMobile)
+        botaoCancelarEditarMobile.addEventListener('click', fecharModalEditar);
     [modalVerMais, modalEditar].forEach(modal => {
         if (modal) {
             modal.addEventListener('click', (evento) => {
@@ -130,17 +131,17 @@ function inicializarCarrossel() {
 // 5. LÓGICA DO POPUP DE FILTROS (MOBILE)
 // ==========================================
 function inicializarFiltroMobile() {
-    const btnAbrirFiltro = document.getElementById('btn-abrir-filtro-mobile');
+    const botaoAbrirFiltro = document.getElementById('btn-abrir-filtro-mobile');
     const modalFiltro = document.getElementById('modal-filtro-mobile');
-    const btnAplicarFiltro = document.getElementById('btn-aplicar-filtro-mobile');
-    if (btnAbrirFiltro && modalFiltro) {
-        btnAbrirFiltro.addEventListener('click', (evento) => {
+    const botaoAplicarFiltro = document.getElementById('btn-aplicar-filtro-mobile');
+    if (botaoAbrirFiltro && modalFiltro) {
+        botaoAbrirFiltro.addEventListener('click', (evento) => {
             evento.preventDefault();
             modalFiltro.classList.remove('hidden');
         });
     }
-    if (btnAplicarFiltro && modalFiltro) {
-        btnAplicarFiltro.addEventListener('click', (evento) => {
+    if (botaoAplicarFiltro && modalFiltro) {
+        botaoAplicarFiltro.addEventListener('click', (evento) => {
             evento.preventDefault();
             modalFiltro.classList.add('hidden');
         });
@@ -157,19 +158,19 @@ function inicializarFiltroMobile() {
 // 6. POSICIONAMENTO DINÂMICO DO BOTÃO +
 // ==========================================
 function ajustarPosicaoBotao() {
-    const btn = document.getElementById('btn-flutuante-adicionar');
+    const botao = document.getElementById('btn-flutuante-adicionar');
     const cards = document.querySelectorAll('.grid-catalogo .card-catalogo');
-    if (!btn || cards.length < 5)
+    if (!botao || cards.length < 5)
         return;
     const cardMobile = cards[1];
     const cardDesktop = cards[4];
     if (window.innerWidth <= 768) {
-        if (btn.parentElement !== cardMobile) {
+        if (botao.parentElement !== cardMobile) {
             cardMobile.appendChild(btn);
         }
     }
     else {
-        if (btn.parentElement !== cardDesktop) {
+        if (botao.parentElement !== cardDesktop) {
             cardDesktop.appendChild(btn);
         }
     }
@@ -192,3 +193,47 @@ if (document.readyState === 'loading') {
 else {
     inicializar();
 }
+// 2. URL base da API (substitua pela URL real do backend se for diferente)
+const API_BASE_URL = 'http://localhost:8000';
+/**
+ * Procura a lista de editoras no servidor e popula os selects do formulário
+ */
+async function carregarEditoras() {
+    try {
+        const resposta = await fetch(`${API_BASE_URL}/editoras/`);
+        if (!resposta.ok) {
+            throw new Error(`Erro na requisição: ${resposta.status}`);
+        }
+        const editoras = await resposta.json();
+        // Elementos select nas modais do Acervo
+        const selectAdicionar = document.getElementById('editora');
+        const selectEditar = document.getElementById('edit-editora');
+        if (selectAdicionar) {
+            preencherSelectEditoras(selectAdicionar, editoras, 'Selecionar');
+        }
+        if (selectEditar) {
+            preencherSelectEditoras(selectEditar, editoras, 'Selecionar');
+        }
+    }
+    catch (erro) {
+        console.error('Erro ao carregar a lista de editoras:', erro);
+    }
+}
+/**
+ * Função auxiliar para popular as tags <option> de um <select>
+ */
+function preencherSelectEditoras(selectElement, editoras, placeholder) {
+    // Limpa opções anteriores mantendo apenas o cabeçalho padrão
+    selectElement.innerHTML = `<option value="" disabled selected>${placeholder}</option>`;
+    editoras.forEach((editora) => {
+        const option = document.createElement('option');
+        option.value = String(editora.id);
+        option.textContent = editora.nome;
+        selectElement.appendChild(option);
+    });
+}
+// Executa o carregamento assim que o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', () => {
+    carregarEditoras();
+});
+//# sourceMappingURL=acervo.js.map
