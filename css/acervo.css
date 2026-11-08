@@ -315,10 +315,10 @@ select option {
     margin-bottom: 45px;
 }
 
-/* CARTÃO DO CATÁLOGO */
+/* CARTÃO DO CATÁLOGO: Proporção Exata 223x326 */
 .card-catalogo {
     width: 100%;
-    aspect-ratio: 2 / 2.9;
+    aspect-ratio: 223 / 326;
     border-radius: 16px;
     background-color: var(--branco);
     border: 1px solid var(--cinza-borda);
@@ -333,8 +333,70 @@ select option {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
+/* SOBREPOSIÇÃO NO HOVER (VISUALIZAR) DE PONTA A PONTA */
 .card-overlay-hover {
-    display: none !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.card-catalogo:hover .card-overlay-hover {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    display: flex !important;
+}
+
+.img-sobreposicao-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    border-radius: 15px;
+}
+
+.overlay-conteudo-texto {
+    position: relative;
+    z-index: 6;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    pointer-events: none;
+}
+
+.overlay-titulo {
+    font-size: 14px;
+    font-weight: 800;
+    color: #000000;
+    line-height: 1.2;
+    max-width: 75%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.overlay-autor {
+    font-size: 12px;
+    font-weight: 500;
+    color: #333333;
+    max-width: 75%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* VISIBILIDADE DOS BOTÕES DESKTOP X MOBILE */
