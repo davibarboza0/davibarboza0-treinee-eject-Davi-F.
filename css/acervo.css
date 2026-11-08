@@ -7,7 +7,6 @@
     --texto-escuro: #2D2D2D;
     --texto-secundario: #666666;
     --branco: #FFFFFF;
-    --verde-livro: #2D7A4F;
 }
 
 * {
@@ -31,6 +30,15 @@ img {
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+}
+
+/* ==========================================================================
+   VISIBILIDADE DAS OPÇÕES DO SELECT
+   ========================================================================== */
+
+select option {
+    color: #2D2D2D !important;
+    background-color: #FFFFFF !important;
 }
 
 /* ==========================================================================
@@ -118,6 +126,15 @@ img {
     margin-bottom: 30px;
 }
 
+.destaque-detalhe {
+    transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+}
+
+.destaque-detalhe.trocando {
+    opacity: 0;
+    transform: translateY(4px);
+}
+
 .destaque-detalhe h2 {
     font-size: 18px;
     font-weight: 700;
@@ -131,7 +148,7 @@ img {
 }
 
 /* ==========================================================================
-   CARROSSEL ACORDEÃO
+   CARROSSEL ACORDEÃO COM ANIMAÇÃO SUAVE
    ========================================================================== */
 
 .novidades-carrossel {
@@ -149,10 +166,15 @@ img {
     cursor: pointer;
     overflow: hidden;
     flex-shrink: 0;
-    transition: width 0.45s cubic-bezier(0.25, 1, 0.5, 1), transform 0.2s ease;
+    transition: width 0.45s cubic-bezier(0.25, 1, 0.5, 1), 
+                transform 0.25s ease, 
+                box-shadow 0.3s ease, 
+                filter 0.3s ease;
     background-size: cover;
     background-position: center;
-    background-color: var(--verde-livro);
+    background-color: var(--cinza-fundo);
+    border: 1px solid var(--cinza-borda);
+    will-change: width, height, transform;
 }
 
 .card-carrossel:hover {
@@ -161,6 +183,7 @@ img {
 
 .card-carrossel.active {
     width: 200px;
+    box-shadow: 0 8px 24px rgba(129, 1, 58, 0.2);
 }
 
 .icone-seta-card {
@@ -172,6 +195,7 @@ img {
     object-fit: contain;
     z-index: 2;
     pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
 .img-seta-ativa {
@@ -291,57 +315,38 @@ img {
     margin-bottom: 45px;
 }
 
+/* CARTÃO DO CATÁLOGO */
 .card-catalogo {
     width: 100%;
     aspect-ratio: 2 / 2.9;
     border-radius: 16px;
-    background-color: var(--verde-livro);
+    background-color: var(--branco);
+    border: 1px solid var(--cinza-borda);
     cursor: pointer;
-    transition: transform 0.25s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
     position: relative;
     overflow: visible;
 }
 
 .card-catalogo:hover {
     transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
-
-/* ==========================================================================
-   SOBREPOSIÇÃO DO CARD NO HOVER
-   ========================================================================== */
 
 .card-overlay-hover {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 16px;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.25s ease, transform 0.25s ease;
-    transform: translateY(4px);
-    z-index: 5;
-    overflow: hidden;
+    display: none !important;
 }
 
-.card-catalogo:hover .card-overlay-hover {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: translateY(0);
+/* VISIBILIDADE DOS BOTÕES DESKTOP X MOBILE */
+.btn-flutuante-mobile {
+    display: none !important;
 }
 
-.img-sobreposicao-card {
-    width: 100%;
-    height: 100%;
-    display: block;
-    object-fit: cover;
-    border-radius: 16px;
+.btn-flutuante-desktop {
+    display: inline-flex !important;
 }
 
-/* --- BOTÃO FLUTUANTE EXPANSÍVEL (+) --- */
+/* BOTÃO FLUTUANTE EXPANSÍVEL (+) DESKTOP */
 .btn-flutuante-adicionar {
     position: absolute;
     right: -12px;
@@ -360,7 +365,7 @@ img {
     padding: 0 10px;
     overflow: hidden;
     white-space: nowrap;
-    transition: padding 2s cubic-bezier(0.25, 1, 0.5, 1),
+    transition: padding 0.4s cubic-bezier(0.25, 1, 0.5, 1),
                 background-color 0.4s ease,
                 box-shadow 0.4s ease;
 }
@@ -372,9 +377,9 @@ img {
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.2px;
-    transition: max-width 2s cubic-bezier(0.25, 1, 0.5, 1),
-                opacity 1.5s ease 0.3s,
-                margin-right 2s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: max-width 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+                opacity 0.3s ease,
+                margin-right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .btn-flutuante-adicionar svg { flex-shrink: 0; }
@@ -506,7 +511,7 @@ img {
 }
 
 /* ==========================================================================
-   ESTILOS DAS JANELAS MODAIS (DESKTOP)
+   ESTILOS DAS JANELAS MODAIS
    ========================================================================== */
 
 .modal-overlay {
@@ -552,7 +557,6 @@ img {
     object-fit: cover;
 }
 
-/* --- DESIGN DESKTOP DO MODAL VER MAIS --- */
 .modal-card-ver-mais {
     max-width: 650px;
     padding: 30px 36px;
@@ -647,7 +651,6 @@ img {
     justify-content: flex-end;
 }
 
-/* --- ELEMENTOS GERAIS DOS MODAIS DE ADICIONAR E EDITAR --- */
 .modal-titulo {
     font-size: 32px;
     font-weight: 800;
@@ -675,6 +678,8 @@ img {
     align-items: center;
     position: relative;
     overflow: hidden;
+    background-color: var(--cinza-fundo);
+    border: 1.5px dashed var(--vinho-principal);
 }
 
 .label-adicionar-capa {
@@ -770,7 +775,6 @@ img {
     pointer-events: none;
 }
 
-/* BOTÕES IMAGEM DOS MODAIS (DESKTOP) */
 .modal-botoes {
     display: flex;
     justify-content: flex-end;
@@ -789,28 +793,47 @@ img {
     gap: 12px;
 }
 
-.btn-modal-img {
+.btn-pilula-outline {
     background: transparent;
-    border: none;
-    outline: none;
-    padding: 0;
+    border: 1.5px solid var(--vinho-principal);
+    color: var(--vinho-principal);
+    border-radius: 50px;
+    padding: 9px 24px;
+    font-size: 14px;
+    font-weight: 700;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transition: background-color 0.2s ease;
 }
 
-.btn-modal-img:hover {
-    opacity: 0.9;
-    transform: scale(1.02);
+.btn-pilula-outline:hover {
+    background-color: rgba(129, 1, 58, 0.05);
 }
 
-.img-btn-modal {
-    height: 44px;
-    width: auto;
-    display: block;
-    object-fit: contain;
+.btn-pilula-solida {
+    background-color: var(--vinho-principal);
+    color: var(--branco);
+    border: none;
+    border-radius: 50px;
+    padding: 9px 22px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+}
+
+.btn-pilula-solida:hover {
+    background-color: var(--vinho-escuro);
+}
+
+.btn-pilula-deletar {
+    background-color: var(--vinho-principal);
 }
 
 /* ==========================================================================
@@ -905,6 +928,24 @@ img {
 
 .btn-aplicar-filtro:hover { opacity: 0.9; }
 
+/* REGRAS IMPORTANT PARA EXIBIÇÃO DAS MODAIS */
+.modal-overlay:not(.hidden),
+.modal-filtro-overlay:not(.hidden) {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+    z-index: 99999 !important;
+}
+
+.modal-overlay.hidden,
+.modal-filtro-overlay.hidden {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
 /* ==========================================================================
    RESPONSIVIDADE (MOBILE / TELAS ATÉ 768px)
    ========================================================================== */
@@ -950,9 +991,12 @@ img {
     .card-carrossel {
         width: 100% !important;
         height: 60px;
+        transition: height 0.45s cubic-bezier(0.25, 1, 0.5, 1), transform 0.2s ease;
     }
 
-    .card-carrossel.active { height: 280px; }
+    .card-carrossel.active { 
+        height: 280px; 
+    }
 
     .destaque-detalhe {
         order: 3;
@@ -1034,10 +1078,30 @@ img {
         object-fit: contain;
     }
 
+    /* Grid 2x2 no Mobile */
     .grid-catalogo {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
-        margin-bottom: 30px;
+        margin-bottom: 35px;
+    }
+
+    .card-catalogo:nth-child(4) {
+        position: relative;
+    }
+
+    /* OCULTAR BOTÃO DESKTOP E EXIBIR APENAS O BOTÃO MOBILE NO CANTO DE "O ILUMINADO" */
+    .btn-flutuante-desktop {
+        display: none !important;
+    }
+
+    .btn-flutuante-mobile {
+        display: inline-flex !important;
+        position: absolute;
+        top: -14px;
+        right: -8px;
+        bottom: auto;
+        height: 38px;
+        z-index: 15;
     }
 
     .paginacao { justify-content: center; }
@@ -1055,9 +1119,6 @@ img {
         height: auto;
     }
 
-    /* ==========================================================================
-       PÁGINAS INTEIRAS MOBILE (MODAIS DE ADICIONAR E EDITAR)
-       ========================================================================== */
     .modal-overlay {
         padding: 0 !important;
         background-color: #FFFFFF !important;
@@ -1078,7 +1139,6 @@ img {
         flex-direction: column !important;
     }
 
-    /* TOPO COM A MESMA IMAGEM CABECALHOACERVO.PNG DO CELULAR */
     .modal-top-mobile {
         display: block !important;
         width: 100%;
@@ -1143,7 +1203,6 @@ img {
         height: 100%;
     }
 
-    /* Exibe pré-visualização ao carregar imagem */
     .caixa-capa-preview.tem-imagem .img-capa-desktop {
         display: block !important;
     }
@@ -1165,7 +1224,6 @@ img {
         backdrop-filter: blur(4px);
     }
 
-    /* FORMULÁRIO COM DADOS LADO A LADO */
     .form-linha-dupla-mobile {
         display: flex !important;
         flex-direction: row !important;
@@ -1181,7 +1239,6 @@ img {
         display: none !important;
     }
 
-    /* BOTÕES MOBILE EM PILULA */
     .modal-botoes-mobile-container {
         display: flex !important;
         justify-content: flex-end;
@@ -1190,36 +1247,6 @@ img {
         margin-top: 28px;
     }
 
-    .btn-pilula-outline {
-        background: transparent;
-        border: 1.5px solid var(--vinho-principal);
-        color: var(--vinho-principal);
-        border-radius: 50px;
-        padding: 10px 24px;
-        font-size: 14px;
-        font-weight: 700;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .btn-pilula-solida {
-        background-color: var(--vinho-principal);
-        color: var(--branco);
-        border: none;
-        border-radius: 50px;
-        padding: 10px 22px;
-        font-size: 14px;
-        font-weight: 700;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        justify-content: center;
-    }
-
-    /* BOTÕES DO EDITAR MATERIAL NO MOBILE (2 LINHAS) */
     .modal-botoes-editar-mobile-container {
         display: flex !important;
         flex-direction: column;
@@ -1240,10 +1267,6 @@ img {
         flex: 1;
     }
 
-    .btn-pilula-deletar {
-        background-color: var(--vinho-principal);
-    }
-
     .btn-full-mobile {
         width: 100% !important;
     }
@@ -1253,7 +1276,6 @@ img {
         margin-top: 40px;
     }
 
-    /* LAYOUT DO MODAL VER MAIS NO TELEMÓVEL */
     .modal-card-ver-mais {
         max-width: 340px !important;
         padding: 0 !important;
