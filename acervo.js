@@ -1,316 +1,6 @@
 "use strict";
 // Endereço base da API backend em produção
 const ENDERECO_BASE_DA_API = 'https://thekaapitrainee1.pythonanywhere.com';
-// Editoras reserva para fallback offline (Trama incluída com id 16)
-const EDITORAS_PADRAO = [
-    { id: 10, nome: "Aleph" },
-    { id: 15, nome: "Alta Books" },
-    { id: 12, nome: "Arqueiro" },
-    { id: 5, nome: "Companhia das Letras" },
-    { id: 9, nome: "Globo" },
-    { id: 11, nome: "HarperCollins Brasil" },
-    { id: 13, nome: "Intrínseca" },
-    { id: 7, nome: "Paralela" },
-    { id: 1, nome: "Penguin-Companhia" },
-    { id: 2, nome: "Principis" },
-    { id: 4, nome: "Record" },
-    { id: 6, nome: "Rocco" },
-    { id: 14, nome: "Suma" },
-    { id: 3, nome: "Todavia" },
-    { id: 8, nome: "Via Leitura" },
-    { id: 16, nome: "Trama" }
-];
-// Gêneros reserva para fallback offline
-const GENEROS_PADRAO = [
-    { id: 2, nome: "Fantasia" },
-    { id: 3, nome: "Ficção Científica" },
-    { id: 5, nome: "Não-ficção" },
-    { id: 1, nome: "Romance" },
-    { id: 4, nome: "Suspense" }
-];
-// Lista completa dos 20 livros reais (IDs 1 ao 20)
-const LIVROS_API_PADRAO = [
-    {
-        id: 20,
-        titulo: "Hábitos Atômicos",
-        numero_paginas: 322,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788550807560.jpg",
-        isbn: "9788550807560",
-        autor: "James Clear",
-        ano_publicacao: 2019,
-        resumo: "James Clear mostra como pequenas mudanças diárias, somadas ao longo do tempo, geram resultados extraordinários. Um método prático para criar bons hábitos, abandonar os ruins e melhorar 1% a cada dia.",
-        genero: 5,
-        genero_nome: "Não-ficção",
-        editora: 15,
-        editora_nome: "Alta Books"
-    },
-    {
-        id: 19,
-        titulo: "Sapiens",
-        numero_paginas: 472,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788535933925.jpg",
-        isbn: "9788535933925",
-        autor: "Yuval Noah Harari",
-        ano_publicacao: 2020,
-        resumo: "Harari percorre a trajetória da humanidade, da revolução cognitiva à científica, para explicar como o Homo sapiens passou a dominar o planeta e que histórias compartilhadas sustentam nossas sociedades.",
-        genero: 5,
-        genero_nome: "Não-ficção",
-        editora: 5,
-        editora_nome: "Companhia das Letras"
-    },
-    {
-        id: 18,
-        titulo: "O Diário de Anne Frank",
-        numero_paginas: 352,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788501068200.jpg",
-        isbn: "9788501068200",
-        autor: "Anne Frank",
-        ano_publicacao: 2014,
-        resumo: "Escondida com a família num anexo secreto em Amsterdã durante a ocupação nazista, Anne registra em seu diário o cotidiano, os medos e os sonhos de uma adolescente. Um dos testemunhos mais marcantes do Holocausto.",
-        genero: 5,
-        genero_nome: "Não-ficção",
-        editora: 4,
-        editora_nome: "Record"
-    },
-    {
-        id: 17,
-        titulo: "O Iluminado",
-        numero_paginas: 464,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788581050485.jpg",
-        isbn: "9788581050485",
-        autor: "Stephen King",
-        ano_publicacao: 2012,
-        resumo: "Jack Torrance aceita ser zelador do isolado Hotel Overlook durante o inverno e leva a esposa e o filho Danny, que tem um dom paranormal. Presos pela neve, eles enfrentam as forças sombrias do hotel.",
-        genero: 4,
-        genero_nome: "Suspense",
-        editora: 14,
-        editora_nome: "Suma"
-    },
-    {
-        id: 16,
-        titulo: "Garota Exemplar",
-        numero_paginas: 448,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788580572902.jpg",
-        isbn: "9788580572902",
-        autor: "Gillian Flynn",
-        ano_publicacao: 2013,
-        resumo: "No dia do quinto aniversário de casamento, Amy Dunne desaparece e o marido, Nick, vira o principal suspeito. Entre diários e versões contraditórias, o casamento perfeito revela suas mentiras.",
-        genero: 4,
-        genero_nome: "Suspense",
-        editora: 13,
-        editora_nome: "Intrínseca"
-    },
-    {
-        id: 15,
-        titulo: "O Código Da Vinci",
-        numero_paginas: 432,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788580416251.jpg",
-        isbn: "9788580416251",
-        autor: "Dan Brown",
-        ano_publicacao: 2016,
-        resumo: "O simbologista Robert Langdon é chamado ao Louvre após o assassinato do curador do museu. Ao lado da criptógrafa Sophie Neveu, ele segue pistas escondidas nas obras de Leonardo da Vinci até um segredo milenar.",
-        genero: 4,
-        genero_nome: "Suspense",
-        editora: 12,
-        editora_nome: "Arqueiro"
-    },
-    {
-        id: 14,
-        titulo: "O Nome do Vento",
-        numero_paginas: 656,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788580410631.jpg",
-        isbn: "9788580410631",
-        autor: "Patrick Rothfuss",
-        ano_publicacao: 2012,
-        resumo: "Kvothe, um lendário arcanista que vive escondido como dono de uma estalagem, conta a verdadeira história de sua vida: a tragédia que destruiu sua trupe, os anos nas ruas e sua entrada na Universidade.",
-        genero: 2,
-        genero_nome: "Fantasia",
-        editora: 12,
-        editora_nome: "Arqueiro"
-    },
-    {
-        id: 13,
-        titulo: "Harry Potter e a Pedra Filosofal",
-        numero_paginas: 208,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788532530783.jpg",
-        isbn: "9788532530783",
-        autor: "J.K. Rowling",
-        ano_publicacao: 2017,
-        resumo: "No seu aniversário de onze anos, Harry descobre que é bruxo e é levado para estudar em Hogwarts. Lá ele faz amigos, conhece a magia e enfrenta o mistério da pedra filosofal escondida no castelo.",
-        genero: 2,
-        genero_nome: "Fantasia",
-        editora: 6,
-        editora_nome: "Rocco"
-    },
-    {
-        id: 12,
-        titulo: "O Hobbit",
-        numero_paginas: 336,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788595084742.jpg",
-        isbn: "9788595084742",
-        autor: "J.R.R. Tolkien",
-        ano_publicacao: 2019,
-        resumo: "Bilbo Bolseiro é arrancado do conforto de sua toca pelo mago Gandalf e por treze anões para recuperar um tesouro guardado pelo dragão Smaug. Uma aventura que dá início ao universo da Terra-média.",
-        genero: 2,
-        genero_nome: "Fantasia",
-        editora: 11,
-        editora_nome: "HarperCollins Brasil"
-    },
-    {
-        id: 11,
-        titulo: "Fundação",
-        numero_paginas: 320,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788576574835.jpg",
-        isbn: "9788576574835",
-        autor: "Isaac Asimov",
-        ano_publicacao: 2009,
-        resumo: "O matemático Hari Seldon prevê a queda do Império Galáctico e cria a Fundação para reduzir de trinta mil para mil anos a era de barbárie que virá. O início de uma das sagas mais influentes da ficção científica.",
-        genero: 3,
-        genero_nome: "Ficção Científica",
-        editora: 10,
-        editora_nome: "Aleph"
-    },
-    {
-        id: 10,
-        titulo: "Duna",
-        numero_paginas: 680,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788576574941.jpg",
-        isbn: "9788576574941",
-        autor: "Frank Herbert",
-        ano_publicacao: 2021,
-        resumo: "Paul Atreides chega a Arrakis, o planeta desértico que produz a especiaria mais valiosa do universo. Traído e caçado, ele se une ao povo fremen e se torna o centro de uma profecia que pode mudar a galáxia.",
-        genero: 3,
-        genero_nome: "Ficção Científica",
-        editora: 10,
-        editora_nome: "Aleph"
-    },
-    {
-        id: 9,
-        titulo: "Admirável Mundo Novo",
-        numero_paginas: 312,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788525033222.jpg",
-        isbn: "9788525033222",
-        autor: "Aldous Huxley",
-        ano_publicacao: 2001,
-        resumo: "Numa sociedade futurista em que as pessoas são fabricadas em laboratório e condicionadas para a felicidade, Bernard Marx e o Selvagem John questionam um mundo sem dor, sem arte e sem liberdade.",
-        genero: 3,
-        genero_nome: "Ficção Científica",
-        editora: 9,
-        editora_nome: "Globo"
-    },
-    {
-        id: 8,
-        titulo: "1984",
-        numero_paginas: 288,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9786587034201.jpg",
-        isbn: "9786587034201",
-        autor: "George Orwell",
-        ano_publicacao: 2020,
-        resumo: "Winston Smith trabalha reescrevendo a história para o Partido, sob a vigilância constante do Grande Irmão. Ao se apaixonar e começar a duvidar do regime, ele descobre o preço da liberdade de pensamento.",
-        genero: 3,
-        genero_nome: "Ficção Científica",
-        editora: 8,
-        editora_nome: "Via Leitura"
-    },
-    {
-        id: 7,
-        titulo: "O Alquimista",
-        numero_paginas: 208,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788584390670.jpg",
-        isbn: "9788584390670",
-        autor: "Paulo Coelho",
-        ano_publicacao: 2017,
-        resumo: "Santiago, um jovem pastor andaluz, parte rumo às pirâmides do Egito atrás de um tesouro revelado em sonho. No caminho, aprende a ouvir o coração e a seguir sua Lenda Pessoal.",
-        genero: 2,
-        genero_nome: "Fantasia",
-        editora: 7,
-        editora_nome: "Paralela"
-    },
-    {
-        id: 6,
-        titulo: "A Hora da Estrela",
-        numero_paginas: 88,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788532530660.jpg",
-        isbn: "9788532530660",
-        autor: "Clarice Lispector",
-        ano_publicacao: 2017,
-        resumo: "O narrador Rodrigo S.M. conta a história de Macabéa, uma nordestina pobre e ingênua que tenta sobreviver no Rio de Janeiro. O último romance de Clarice reflete sobre a escrita, a solidão e a invisibilidade.",
-        genero: 1,
-        genero_nome: "Romance",
-        editora: 6,
-        editora_nome: "Rocco"
-    },
-    {
-        id: 5,
-        titulo: "Capitães da Areia",
-        numero_paginas: 283,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788535911695.jpg",
-        isbn: "9788535911695",
-        autor: "Jorge Amado",
-        ano_publicacao: 2008,
-        resumo: "Em Salvador, um grupo de meninos abandonados vive de pequenos furtos num trapiche à beira-mar. Liderados por Pedro Bala, eles enfrentam a violência das ruas e descobrem amizade, amor e consciência social.",
-        genero: 1,
-        genero_nome: "Romance",
-        editora: 5,
-        editora_nome: "Companhia das Letras"
-    },
-    {
-        id: 4,
-        titulo: "Vidas Secas",
-        numero_paginas: 176,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788501114778.jpg",
-        isbn: "9788501114778",
-        autor: "Graciliano Ramos",
-        ano_publicacao: 2018,
-        resumo: "Fabiano, sinhá Vitória, os dois filhos e a cachorra Baleia fogem da seca pelo sertão nordestino em busca de sobrevivência. Uma narrativa seca e precisa sobre miséria, silêncio e dignidade.",
-        genero: 1,
-        genero_nome: "Romance",
-        editora: 4,
-        editora_nome: "Record"
-    },
-    {
-        id: 3,
-        titulo: "O Cortiço",
-        numero_paginas: 304,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788593828966.jpg",
-        isbn: "9788593828966",
-        autor: "Aluísio Azevedo",
-        ano_publicacao: 2019,
-        resumo: "No Rio de Janeiro do século XIX, o português João Romão enriquece explorando os moradores de um cortiço. O romance naturalista retrata a vida coletiva, a ganância e as tensões sociais de uma cidade em transformação.",
-        genero: 1,
-        genero_nome: "Romance",
-        editora: 3,
-        editora_nome: "Todavia"
-    },
-    {
-        id: 2,
-        titulo: "Memórias Póstumas de Brás Cubas",
-        numero_paginas: 208,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788594318619.jpg",
-        isbn: "9788594318619",
-        autor: "Machado de Assis",
-        ano_publicacao: 2019,
-        resumo: "Já morto, Brás Cubas decide escrever suas memórias e repassa com ironia uma vida de privilégios, amores frustrados e ambições pequenas. O romance que inaugurou o Realismo no Brasil e virou do avesso a forma de narrar.",
-        genero: 1,
-        genero_nome: "Romance",
-        editora: 2,
-        editora_nome: "Principis"
-    },
-    {
-        id: 1,
-        titulo: "Dom Casmurro",
-        numero_paginas: 400,
-        capa: "https://thekaapitrainee1.pythonanywhere.com/media/capas_livros/9788582850350.jpg",
-        isbn: "9788582850350",
-        autor: "Machado de Assis",
-        ano_publicacao: 2016,
-        resumo: "Bento Santiago, o Bentinho, narra sua vida desde a juventude até a velhice, revivendo o amor por Capitu e o ciúme que o leva a suspeitar de uma traição com seu melhor amigo, Escobar. Um clássico sobre memória, dúvida e o olhar de quem conta a história.",
-        genero: 1,
-        genero_nome: "Romance",
-        editora: 1,
-        editora_nome: "Penguin-Companhia"
-    }
-];
 let livroSelecionadoAtualmente = null;
 let paginaAtual = 1;
 function atualizarPaginacaoUI(pagina) {
@@ -378,32 +68,33 @@ function buscarTodosOsSeletoresDeEditora() {
         seletores.add(seletoresMobile[1]);
     return Array.from(seletores);
 }
+/**
+ * GET /generos/ - Carrega apenas os gêneros existentes na API
+ */
 async function carregarListaDeGeneros() {
-    let lista = GENEROS_PADRAO;
     try {
-        const resposta = await fetch(`${ENDERECO_BASE_DA_API}/generos/`, { method: 'GET', headers: { 'Accept': 'application/json' } });
+        const resposta = await fetch(`${ENDERECO_BASE_DA_API}/generos/`, {
+            method: 'GET',
+            headers: { 'Accept': 'application/json' }
+        });
         if (resposta.ok) {
             const dados = await resposta.json();
             const listaExtraida = Array.isArray(dados) ? dados : (dados.results || []);
-            if (listaExtraida.length > 0) {
-                lista = [...listaExtraida, ...GENEROS_PADRAO];
-            }
+            const generosUnicos = filtrarDuplicadosPorNome(listaExtraida).sort((a, b) => a.nome.localeCompare(b.nome));
+            buscarTodosOsSeletoresDeGenero().forEach((s) => {
+                const txt = s.classList.contains('select-filtro') || s.classList.contains('select-modal-filtro') ? 'Gênero' : 'Selecionar';
+                preencherOpcoesDoSeletor(s, generosUnicos, txt);
+            });
         }
     }
     catch (erro) {
-        console.warn('Usando lista reserva de gêneros.', erro);
+        console.error('Erro ao carregar lista de gêneros:', erro);
     }
-    const generosUnicos = filtrarDuplicadosPorNome(lista).sort((a, b) => a.nome.localeCompare(b.nome));
-    buscarTodosOsSeletoresDeGenero().forEach((s) => {
-        const txt = s.classList.contains('select-filtro') || s.classList.contains('select-modal-filtro') ? 'Gênero' : 'Selecionar';
-        preencherOpcoesDoSeletor(s, generosUnicos, txt);
-    });
 }
 /**
- * Carrega a lista de editoras da API e mescla com a lista padrão
+ * GET /editoras/ - Carrega apenas as editoras existentes na API
  */
 async function carregarListaDeEditoras() {
-    let lista = EDITORAS_PADRAO;
     try {
         const resposta = await fetch(`${ENDERECO_BASE_DA_API}/editoras/`, {
             method: 'GET',
@@ -412,25 +103,21 @@ async function carregarListaDeEditoras() {
         if (resposta.ok) {
             const dados = await resposta.json();
             const listaExtraida = Array.isArray(dados) ? dados : (dados.results || []);
-            if (listaExtraida.length > 0) {
-                lista = [...listaExtraida, ...EDITORAS_PADRAO];
-            }
+            const editorasUnicas = filtrarDuplicadosPorNome(listaExtraida).sort((a, b) => a.nome.localeCompare(b.nome));
+            buscarTodosOsSeletoresDeEditora().forEach((s) => {
+                const txt = s.classList.contains('select-filtro') || s.classList.contains('select-modal-filtro') ? 'Editora' : 'Selecionar';
+                preencherOpcoesDoSeletor(s, editorasUnicas, txt);
+            });
         }
     }
     catch (erro) {
-        console.warn('Usando lista reserva de editoras.', erro);
+        console.error('Erro ao carregar lista de editoras:', erro);
     }
-    const editorasUnicas = filtrarDuplicadosPorNome(lista).sort((a, b) => a.nome.localeCompare(b.nome));
-    buscarTodosOsSeletoresDeEditora().forEach((s) => {
-        const txt = s.classList.contains('select-filtro') || s.classList.contains('select-modal-filtro') ? 'Editora' : 'Selecionar';
-        preencherOpcoesDoSeletor(s, editorasUnicas, txt);
-    });
 }
 /**
- * GET /livros/novidades/ - Conecta com as Novidades da Semana para o carrossel
+ * GET /livros/novidades/ - Carrega novidades diretamente da API
  */
 async function carregarNovidadesDaSemana() {
-    let novidades = LIVROS_API_PADRAO.slice(0, 5);
     try {
         const resposta = await fetch(`${ENDERECO_BASE_DA_API}/livros/novidades/`, {
             method: 'GET',
@@ -439,27 +126,31 @@ async function carregarNovidadesDaSemana() {
         if (resposta.ok) {
             const dados = await resposta.json();
             const listaExtraida = Array.isArray(dados) ? dados : (dados.results || []);
-            if (listaExtraida.length > 0) {
-                novidades = listaExtraida;
-            }
+            renderizarCarrosselNovidades(listaExtraida);
         }
     }
     catch (erro) {
-        console.warn('Utilizando novidades padrão para o carrossel.', erro);
+        console.error('Erro ao carregar novidades:', erro);
     }
-    renderizarCarrosselNovidades(novidades);
 }
 /**
- * Renderiza dinamicamente as capas, títulos e autores com transição suave ao clicar
+ * Renderiza dinamicamente o carrossel de novidades
  */
 function renderizarCarrosselNovidades(livros) {
     const containerCarrossel = document.querySelector('.novidades-carrossel');
     const elDestaqueContainer = document.querySelector('.destaque-detalhe');
     const elTituloDestaque = document.querySelector('.destaque-detalhe h2');
     const elAutorDestaque = document.querySelector('.destaque-detalhe p');
-    if (!containerCarrossel || livros.length === 0)
+    if (!containerCarrossel)
         return;
     containerCarrossel.innerHTML = '';
+    if (livros.length === 0) {
+        if (elTituloDestaque)
+            elTituloDestaque.textContent = 'Sem novidades no momento';
+        if (elAutorDestaque)
+            elAutorDestaque.textContent = '';
+        return;
+    }
     const livrosExibidos = livros.slice(0, 5);
     livrosExibidos.forEach((livro, index) => {
         const card = document.createElement('div');
@@ -527,6 +218,10 @@ function renderizarLivrosNoCatalogo(livros) {
     if (!containerGrelha)
         return;
     containerGrelha.innerHTML = '';
+    if (livros.length === 0) {
+        containerGrelha.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">Nenhum livro encontrado no acervo.</p>';
+        return;
+    }
     livros.forEach((livro, index) => {
         const cardDiv = document.createElement('div');
         cardDiv.className = 'card-catalogo';
@@ -536,11 +231,21 @@ function renderizarLivrosNoCatalogo(livros) {
             cardDiv.style.backgroundSize = 'cover';
             cardDiv.style.backgroundPosition = 'center';
         }
+        const tituloLivro = livro.titulo || 'Título indisponível';
+        const autorLivro = livro.autor || 'Autor desconhecido';
+        const anoLivro = livro.ano_publicacao ? livro.ano_publicacao : '';
+        const autorEAno = anoLivro ? `${autorLivro}, ${anoLivro}` : autorLivro;
         const overlayDiv = document.createElement('div');
         overlayDiv.className = 'card-overlay-hover';
-        overlayDiv.innerHTML = `<img src="../imagens/sobreposicaolivro.png" alt="Sobreposição" class="img-sobreposicao-card" draggable="false">`;
+        overlayDiv.innerHTML = `
+            <img src="../imagens/vizualizar.png" alt="Visualizar ${tituloLivro}" class="img-sobreposicao-card" draggable="false">
+            <div class="overlay-conteudo-texto">
+                <h3 class="overlay-titulo">${tituloLivro}</h3>
+                <p class="overlay-autor">${autorEAno}</p>
+            </div>
+        `;
         cardDiv.appendChild(overlayDiv);
-        // Botão para o MOBILE (no 4º livro: O Iluminado, index === 3)
+        // Botão MOBILE (4º card)
         if (index === 3) {
             const btnMobile = document.createElement('button');
             btnMobile.type = 'button';
@@ -555,7 +260,7 @@ function renderizarLivrosNoCatalogo(livros) {
             `;
             cardDiv.appendChild(btnMobile);
         }
-        // Botão para o DESKTOP (no 5º livro: Garota Exemplar, index === 4)
+        // Botão DESKTOP (5º card)
         if (index === 4) {
             const btnDesktop = document.createElement('button');
             btnDesktop.type = 'button';
@@ -578,7 +283,7 @@ function renderizarLivrosNoCatalogo(livros) {
         });
         containerGrelha.appendChild(cardDiv);
     });
-    if (livros.length <= 3) {
+    if (livros.length <= 3 && livros.length > 0) {
         const ultimoCard = containerGrelha.lastElementChild;
         if (ultimoCard && !containerGrelha.querySelector('.btn-flutuante-adicionar')) {
             const btnFlutuante = document.createElement('button');
@@ -596,6 +301,9 @@ function renderizarLivrosNoCatalogo(livros) {
         }
     }
 }
+/**
+ * GET /livros/ - Carrega apenas a lista real de livros da API
+ */
 async function carregarCatalogoDeLivros(pagina = 1) {
     paginaAtual = pagina;
     atualizarPaginacaoUI(pagina);
@@ -604,7 +312,6 @@ async function carregarCatalogoDeLivros(pagina = 1) {
     const generoId = seletoresGenero.find((s) => s.value !== '')?.value || '';
     const editoraId = seletoresEditora.find((s) => s.value !== '')?.value || '';
     const termoBusca = document.querySelector('.input-busca')?.value.trim() || '';
-    let listaLivros = LIVROS_API_PADRAO;
     try {
         const parametros = new URLSearchParams();
         parametros.append('page', String(pagina));
@@ -621,15 +328,16 @@ async function carregarCatalogoDeLivros(pagina = 1) {
         if (resposta.ok) {
             const dados = await resposta.json();
             const resultados = Array.isArray(dados) ? dados : (dados.results || []);
-            if (resultados.length > 0) {
-                listaLivros = resultados;
-            }
+            renderizarLivrosNoCatalogo(resultados);
+        }
+        else {
+            renderizarLivrosNoCatalogo([]);
         }
     }
     catch (erro) {
-        console.warn('Utilizando lista reserva de livros.', erro);
+        console.error('Erro ao carregar livros da API:', erro);
+        renderizarLivrosNoCatalogo([]);
     }
-    renderizarLivrosNoCatalogo(listaLivros);
 }
 function preencherEExibirModalVerMais(livro) {
     livroSelecionadoAtualmente = livro;
@@ -682,16 +390,11 @@ function preencherModalEditar(livro) {
         elEditora.value = String(livro.editora);
     }
 }
-/**
- * POST /livros/ - Envia novo livro usando FormData
- */
 async function cadastrarLivro(dadosFormulario) {
     try {
         const resposta = await fetch(`${ENDERECO_BASE_DA_API}/livros/`, {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json'
-            },
+            headers: { 'Accept': 'application/json' },
             body: dadosFormulario
         });
         if (resposta.ok || resposta.status === 201) {
@@ -714,16 +417,11 @@ async function cadastrarLivro(dadosFormulario) {
     }
     return false;
 }
-/**
- * PUT /livros/{id}/ - Atualiza um livro existente
- */
 async function atualizarLivro(idLivro, dadosAtualizados) {
     try {
         const resposta = await fetch(`${ENDERECO_BASE_DA_API}/livros/${idLivro}/`, {
             method: 'PUT',
-            headers: {
-                'Accept': 'application/json'
-            },
+            headers: { 'Accept': 'application/json' },
             body: dadosAtualizados
         });
         if (resposta.ok) {
@@ -746,9 +444,6 @@ async function atualizarLivro(idLivro, dadosAtualizados) {
     }
     return false;
 }
-/**
- * DELETE /livros/{id}/ - Elimina um livro da API
- */
 async function deletarLivro(idLivro) {
     if (!confirm('Tem certeza de que deseja excluir este livro?'))
         return false;
