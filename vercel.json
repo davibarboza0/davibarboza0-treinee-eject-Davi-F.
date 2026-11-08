@@ -1,8 +1,6 @@
 {
   "rewrites": [
-    {
-      "source": "/",
-      "destination": "/html/acervo.html"
-    }
+    { "source": "/", "destination": "/html/index.html" },
+    { "source": "/:path*", "destination": "/html/:path*" }
   ]
 }
