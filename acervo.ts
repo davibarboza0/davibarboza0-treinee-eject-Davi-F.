@@ -41,7 +41,7 @@ interface RespostaPaginadaLivros {
 // Endereço base da API backend em produção
 const ENDERECO_BASE_DA_API: string = 'https://thekaapitrainee1.pythonanywhere.com';
 
-// Editoras reserva para fallback offline (Trama incluída com id 16)
+// Editoras reserva para fallback offline
 const EDITORAS_PADRAO: Editora[] = [
     { id: 10, nome: "Aleph" },
     { id: 15, nome: "Alta Books" },
@@ -591,9 +591,16 @@ function renderizarLivrosNoCatalogo(livros: Livro[]): void {
             cardDiv.style.backgroundPosition = 'center';
         }
 
+        // Overlay que toca de ponta a ponta com a imagem vizualizar.png e informações dinâmicas
         const overlayDiv = document.createElement('div');
         overlayDiv.className = 'card-overlay-hover';
-        overlayDiv.innerHTML = `<img src="../imagens/sobreposicaolivro.png" alt="Sobreposição" class="img-sobreposicao-card" draggable="false">`;
+        overlayDiv.innerHTML = `
+            <img src="../imagens/vizualizar.png" alt="Visualizar ${livro.titulo}" class="img-sobreposicao-card" draggable="false">
+            <div class="overlay-conteudo-texto">
+                <span class="overlay-titulo">${livro.titulo}</span>
+                <span class="overlay-autor">${livro.autor}, ${livro.ano_publicacao}</span>
+            </div>
+        `;
         cardDiv.appendChild(overlayDiv);
 
         // Botão para o MOBILE (no 4º livro: O Iluminado, index === 3)
