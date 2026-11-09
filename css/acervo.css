@@ -32,18 +32,10 @@ img {
     -ms-user-select: none;
 }
 
-/* ==========================================================================
-   VISIBILIDADE DAS OPÇÕES DO SELECT
-   ========================================================================== */
-
 select option {
     color: #2D2D2D !important;
     background-color: #FFFFFF !important;
 }
-
-/* ==========================================================================
-   CABEÇALHO COM CAMADAS CLICÁVEIS (NAVEGAÇÃO)
-   ========================================================================== */
 
 .header-container {
     width: 100%;
@@ -100,10 +92,6 @@ select option {
 .nav-overlay-desktop .link-overlay-sobrenos { left: 44%; width: 42%; }
 .nav-overlay-desktop .link-overlay-usuario { left: 87%; width: 13%; }
 
-/* ==========================================================================
-   CONTEÚDO PRINCIPAL
-   ========================================================================== */
-
 .conteudo-principal {
     max-width: 1080px;
     margin: 0 auto;
@@ -146,10 +134,6 @@ select option {
     color: var(--texto-secundario);
     margin-top: 4px;
 }
-
-/* ==========================================================================
-   CARROSSEL ACORDEÃO COM ANIMAÇÃO SUAVE
-   ========================================================================== */
 
 .novidades-carrossel {
     display: flex;
@@ -198,25 +182,10 @@ select option {
     transition: opacity 0.3s ease;
 }
 
-.img-seta-ativa {
-    display: none;
-}
-
-.img-seta-inativa {
-    display: block;
-}
-
-.card-carrossel.active .img-seta-ativa {
-    display: block;
-}
-
-.card-carrossel.active .img-seta-inativa {
-    display: none;
-}
-
-/* ==========================================================================
-   CATÁLOGO, BUSCA E FILTROS DESKTOP
-   ========================================================================== */
+.img-seta-ativa { display: none; }
+.img-seta-inativa { display: block; }
+.card-carrossel.active .img-seta-ativa { display: block; }
+.card-carrossel.active .img-seta-inativa { display: none; }
 
 .catalogo-secao {
     width: 100%;
@@ -254,13 +223,8 @@ select option {
     background: transparent;
 }
 
-.input-busca::placeholder {
-    color: #A0A0A0;
-}
-
-.btn-buscar-icone {
-    display: none;
-}
+.input-busca::placeholder { color: #A0A0A0; }
+.btn-buscar-icone { display: none; }
 
 .filtros-grupo-desktop {
     display: flex;
@@ -295,13 +259,8 @@ select option {
     transition: opacity 0.2s ease;
 }
 
-.btn-buscar:hover {
-    opacity: 0.9;
-}
-
-.btn-filtro-mobile {
-    display: none;
-}
+.btn-buscar:hover { opacity: 0.9; }
+.btn-filtro-mobile { display: none; }
 
 .grid-container-relativo {
     position: relative;
@@ -315,7 +274,6 @@ select option {
     margin-bottom: 45px;
 }
 
-/* CARTÃO DO CATÁLOGO: Proporção Exata 223x326 */
 .card-catalogo {
     width: 100%;
     aspect-ratio: 223 / 326;
@@ -333,49 +291,46 @@ select option {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
-/* SOBREPOSIÇÃO NO HOVER (VISUALIZAR) DE PONTA A PONTA */
+/* SOBREPOSIÇÃO NO HOVER (VISUALIZAR) NA PARTE INFERIOR DO CARD */
 .card-overlay-hover {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    border-radius: 15px;
+    border-radius: 16px;
     overflow: hidden;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
     z-index: 5;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
 }
 
 .card-catalogo:hover .card-overlay-hover {
     opacity: 1 !important;
     pointer-events: auto !important;
-    display: flex !important;
 }
 
 .img-sobreposicao-card {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto;
     pointer-events: none;
-    border-radius: 15px;
 }
 
 .overlay-conteudo-texto {
-    position: relative;
+    position: absolute;
+    bottom: 16px;
+    left: 14px;
+    right: 65px;
     z-index: 6;
-    padding: 12px 14px;
     display: flex;
     flex-direction: column;
     gap: 2px;
     pointer-events: none;
+    text-align: left;
 }
 
 .overlay-titulo {
@@ -383,8 +338,9 @@ select option {
     font-weight: 800;
     color: #000000;
     line-height: 1.2;
-    max-width: 75%;
-    white-space: nowrap;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -393,22 +349,15 @@ select option {
     font-size: 12px;
     font-weight: 500;
     color: #333333;
-    max-width: 75%;
+    line-height: 1.2;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-/* VISIBILIDADE DOS BOTÕES DESKTOP X MOBILE */
-.btn-flutuante-mobile {
-    display: none !important;
-}
+.btn-flutuante-mobile { display: none !important; }
+.btn-flutuante-desktop { display: inline-flex !important; }
 
-.btn-flutuante-desktop {
-    display: inline-flex !important;
-}
-
-/* BOTÃO FLUTUANTE EXPANSÍVEL (+) DESKTOP */
 .btn-flutuante-adicionar {
     position: absolute;
     right: -12px;
@@ -496,10 +445,6 @@ select option {
     cursor: pointer;
 }
 
-/* ==========================================================================
-   RODAPÉ
-   ========================================================================== */
-
 .rodape {
     background-color: var(--vinho-principal);
     color: var(--branco);
@@ -572,10 +517,6 @@ select option {
     opacity: 0.6;
 }
 
-/* ==========================================================================
-   ESTILOS DAS JANELAS MODAIS
-   ========================================================================== */
-
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -643,9 +584,7 @@ select option {
     transition: background-color 0.2s ease;
 }
 
-.btn-fechar-modal:hover {
-    background-color: #EFEFEF;
-}
+.btn-fechar-modal:hover { background-color: #EFEFEF; }
 
 .ver-mais-conteudo {
     display: flex;
@@ -898,10 +837,6 @@ select option {
     background-color: var(--vinho-principal);
 }
 
-/* ==========================================================================
-   POPUP DE FILTROS DO CELULAR
-   ========================================================================== */
-
 .modal-filtro-overlay {
     position: fixed;
     top: 0;
@@ -990,7 +925,6 @@ select option {
 
 .btn-aplicar-filtro:hover { opacity: 0.9; }
 
-/* REGRAS IMPORTANT PARA EXIBIÇÃO DAS MODAIS */
 .modal-overlay:not(.hidden),
 .modal-filtro-overlay:not(.hidden) {
     display: flex !important;
@@ -1007,10 +941,6 @@ select option {
     visibility: hidden !important;
     pointer-events: none !important;
 }
-
-/* ==========================================================================
-   RESPONSIVIDADE (MOBILE / TELAS ATÉ 768px)
-   ========================================================================== */
 
 @media (max-width: 768px) {
     .header-container { padding: 12px 10px; }
@@ -1056,9 +986,7 @@ select option {
         transition: height 0.45s cubic-bezier(0.25, 1, 0.5, 1), transform 0.2s ease;
     }
 
-    .card-carrossel.active { 
-        height: 280px; 
-    }
+    .card-carrossel.active { height: 280px; }
 
     .destaque-detalhe {
         order: 3;
@@ -1140,21 +1068,14 @@ select option {
         object-fit: contain;
     }
 
-    /* Grid 2x2 no Mobile */
     .grid-catalogo {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
         margin-bottom: 35px;
     }
 
-    .card-catalogo:nth-child(4) {
-        position: relative;
-    }
-
-    /* OCULTAR BOTÃO DESKTOP E EXIBIR APENAS O BOTÃO MOBILE NO CANTO DE "O ILUMINADO" */
-    .btn-flutuante-desktop {
-        display: none !important;
-    }
+    .card-catalogo:nth-child(4) { position: relative; }
+    .btn-flutuante-desktop { display: none !important; }
 
     .btn-flutuante-mobile {
         display: inline-flex !important;
@@ -1167,7 +1088,6 @@ select option {
     }
 
     .paginacao { justify-content: center; }
-
     .rodape { padding: 35px 16px 20px 16px; }
 
     .rodape-conteudo {
@@ -1247,13 +1167,8 @@ select option {
         margin: 0 auto;
     }
 
-    .caixa-capa-mobile-style {
-        background-color: #A3A3A3;
-    }
-
-    .img-capa-desktop {
-        display: none;
-    }
+    .caixa-capa-mobile-style { background-color: #A3A3A3; }
+    .img-capa-desktop { display: none; }
 
     .caixa-capa-placeholder-mobile {
         display: flex;
@@ -1265,13 +1180,8 @@ select option {
         height: 100%;
     }
 
-    .caixa-capa-preview.tem-imagem .img-capa-desktop {
-        display: block !important;
-    }
-
-    .caixa-capa-preview.tem-imagem .caixa-capa-placeholder-mobile {
-        display: none !important;
-    }
+    .caixa-capa-preview.tem-imagem .img-capa-desktop { display: block !important; }
+    .caixa-capa-preview.tem-imagem .caixa-capa-placeholder-mobile { display: none !important; }
 
     .btn-adicionar-capa-pilula {
         background-color: rgba(255, 255, 255, 0.35);
@@ -1293,13 +1203,8 @@ select option {
         width: 100% !important;
     }
 
-    .form-linha-dupla-mobile .campo-grupo {
-        flex: 1 !important;
-    }
-
-    .modal-botoes-desktop {
-        display: none !important;
-    }
+    .form-linha-dupla-mobile .campo-grupo { flex: 1 !important; }
+    .modal-botoes-desktop { display: none !important; }
 
     .modal-botoes-mobile-container {
         display: flex !important;
@@ -1325,13 +1230,8 @@ select option {
         gap: 12px;
     }
 
-    .botoes-linha-superior-mobile .btn-pilula-solida {
-        flex: 1;
-    }
-
-    .btn-full-mobile {
-        width: 100% !important;
-    }
+    .botoes-linha-superior-mobile .btn-pilula-solida { flex: 1; }
+    .btn-full-mobile { width: 100% !important; }
 
     .modal-rodape-mobile {
         display: block !important;
@@ -1375,32 +1275,10 @@ select option {
         object-position: top center;
     }
 
-    .ver-mais-info {
-        padding: 20px 20px 24px 20px;
-    }
-
-    .ver-mais-titulo {
-        font-size: 24px;
-    }
-
-    .ver-mais-autor {
-        font-size: 15px;
-        margin-bottom: 14px;
-    }
-
-    .ver-mais-resumo {
-        font-size: 13px;
-        line-height: 1.4;
-        margin-bottom: 18px;
-    }
-
-    .ver-mais-paginas {
-        font-size: 12px;
-        margin-bottom: 10px;
-    }
-
-    .ver-mais-editora {
-        font-size: 15px;
-        margin-bottom: 16px;
-    }
+    .ver-mais-info { padding: 20px 20px 24px 20px; }
+    .ver-mais-titulo { font-size: 24px; }
+    .ver-mais-autor { font-size: 15px; margin-bottom: 14px; }
+    .ver-mais-resumo { font-size: 13px; line-height: 1.4; margin-bottom: 18px; }
+    .ver-mais-paginas { font-size: 12px; margin-bottom: 10px; }
+    .ver-mais-editora { font-size: 15px; margin-bottom: 16px; }
 }
