@@ -1,6 +1,6 @@
 "use strict";
 (() => {
-    const ENDERECO_BASE_DA_API = 'https://thekaapitrainee1.pythonanywhere.com';
+    const ENDERECO_BASE_DA_API = '/api-proxy';
     document.addEventListener('DOMContentLoaded', () => {
         configurarBotoesOlho();
         configurarFormularioLogin();

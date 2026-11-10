@@ -1,5 +1,5 @@
 (() => {
-    const ENDERECO_BASE_DA_API: string = 'https://thekaapitrainee1.pythonanywhere.com';
+    const ENDERECO_BASE_DA_API: string = '/api-proxy';
 
     interface UsuarioResponse {
         id: number | string;
@@ -53,7 +53,7 @@
     }
 
     /**
-     * 1. Login -> POST /auth/token/
+     * 1. Login -> POST /api-proxy/auth/token/
      */
     function configurarFormularioLogin(): void {
         const form = document.getElementById('form-login') as HTMLFormElement | null;
@@ -99,7 +99,7 @@
     }
 
     /**
-     * 2. Cadastro -> POST /users/
+     * 2. Cadastro -> POST /api-proxy/users/
      */
     function configurarFormularioCadastro(): void {
         const form = document.getElementById('form-cadastro') as HTMLFormElement | null;
@@ -179,7 +179,7 @@
     }
 
     /**
-     * 3. Recuperar Senha -> Verifica e-mail via GET /users/?search=... e redireciona
+     * 3. Recuperar Senha -> GET /api-proxy/users/?search=...
      */
     function configurarFormularioRecuperarSenha(): void {
         const form = document.getElementById('form-recuperar') as HTMLFormElement | null;
@@ -227,7 +227,7 @@
     }
 
     /**
-     * 4. Redefinir Senha -> Atualiza via PATCH /users/{id}/ ou /auth/password/reset/confirm/
+     * 4. Redefinir Senha -> PATCH /api-proxy/users/{id}/ ou POST /api-proxy/auth/password/reset/confirm/
      */
     function configurarFormularioRedefinirSenha(): void {
         const form = document.getElementById('form-redefinir') as HTMLFormElement | null;

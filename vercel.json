@@ -1,3 +1,9 @@
 {
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "rewrites": [
+    {
+      "source": "/api-proxy/:path*",
+      "destination": "https://thekaapitrainee1.pythonanywhere.com/:path*"
+    }
+  ]
 }
