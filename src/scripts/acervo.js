@@ -1,8 +1,7 @@
 "use strict";
 (() => {
-    // 🔒 TRAVA DE AUTENTICAÇÃO IMEDIATA
     if (!localStorage.getItem('access_token')) {
-        window.location.replace('./index.html');
+        window.location.replace('../../index.html');
         return;
     }
     const ENDERECO_BASE_DA_API = 'https://thekaapitrainee1.pythonanywhere.com';
@@ -21,12 +20,13 @@
     function realizarLogout() {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
-        window.location.replace('./index.html');
+        window.location.replace('../../index.html');
     }
     function atualizarPaginacaoUI(pagina) {
         const botoesPagina = document.querySelectorAll('.paginacao .page-num');
         botoesPagina.forEach((btn) => {
-            const num = Number(btn.textContent?.trim());
+            var _a;
+            const num = Number((_a = btn.textContent) === null || _a === void 0 ? void 0 : _a.trim());
             if (num === pagina) {
                 btn.classList.add('active');
             }
@@ -172,8 +172,8 @@
                 card.style.backgroundPosition = 'center';
             }
             card.innerHTML = `
-                <img src="../imagens/setad.png" alt="Seta selecionada" class="icone-seta-card img-seta-ativa" draggable="false">
-                <img src="../imagens/setac.png" alt="Seta inativa" class="icone-seta-card img-seta-inativa" draggable="false">
+                <img src="../assets/images/setad.png" alt="Seta selecionada" class="icone-seta-card img-seta-ativa" draggable="false">
+                <img src="../assets/images/setac.png" alt="Seta inativa" class="icone-seta-card img-seta-inativa" draggable="false">
             `;
             if (eAtivo) {
                 if (elTituloDestaque)
@@ -246,7 +246,7 @@
             const overlayDiv = document.createElement('div');
             overlayDiv.className = 'card-overlay-hover';
             overlayDiv.innerHTML = `
-                <img src="../imagens/vizualizar.png" alt="Visualizar ${tituloLivro}" class="img-sobreposicao-card" draggable="false">
+                <img src="../assets/images/vizualizar.png" alt="Visualizar ${tituloLivro}" class="img-sobreposicao-card" draggable="false">
                 <div class="overlay-conteudo-texto">
                     <h3 class="overlay-titulo">${tituloLivro}</h3>
                     <p class="overlay-autor">${autorEAno}</p>
@@ -308,13 +308,14 @@
         }
     }
     async function carregarCatalogoDeLivros(pagina = 1) {
+        var _a, _b, _c;
         paginaAtual = pagina;
         atualizarPaginacaoUI(pagina);
         const seletoresGenero = buscarTodosOsSeletoresDeGenero();
         const seletoresEditora = buscarTodosOsSeletoresDeEditora();
-        const generoId = seletoresGenero.find((s) => s.value !== '')?.value || '';
-        const editoraId = seletoresEditora.find((s) => s.value !== '')?.value || '';
-        const termoBusca = document.querySelector('.input-busca')?.value.trim() || '';
+        const generoId = ((_a = seletoresGenero.find((s) => s.value !== '')) === null || _a === void 0 ? void 0 : _a.value) || '';
+        const editoraId = ((_b = seletoresEditora.find((s) => s.value !== '')) === null || _b === void 0 ? void 0 : _b.value) || '';
+        const termoBusca = ((_c = document.querySelector('.input-busca')) === null || _c === void 0 ? void 0 : _c.value.trim()) || '';
         try {
             const parametros = new URLSearchParams();
             parametros.append('page', String(pagina));
@@ -389,12 +390,10 @@
             elAno.value = String(livro.ano_publicacao);
         if (elResumo)
             elResumo.value = livro.resumo;
-        if (elGenero && livro.genero) {
+        if (elGenero && livro.genero)
             elGenero.value = String(livro.genero);
-        }
-        if (elEditora && livro.editora) {
+        if (elEditora && livro.editora)
             elEditora.value = String(livro.editora);
-        }
     }
     async function cadastrarLivro(dadosFormulario) {
         try {
@@ -559,7 +558,8 @@
         const botoesPagina = document.querySelectorAll('.paginacao .page-num');
         botoesPagina.forEach((btn) => {
             btn.addEventListener('click', () => {
-                const num = Number(btn.textContent?.trim());
+                var _a;
+                const num = Number((_a = btn.textContent) === null || _a === void 0 ? void 0 : _a.trim());
                 if (num) {
                     paginaAtual = num;
                     carregarCatalogoDeLivros(paginaAtual);
@@ -570,17 +570,18 @@
         const formEditar = document.getElementById('form-editar-material');
         if (formAdicionar) {
             formAdicionar.addEventListener('submit', async (e) => {
+                var _a, _b, _c, _d, _e, _f, _g, _h;
                 e.preventDefault();
                 const inputCapa = document.getElementById('input-capa');
-                const valorGenero = document.getElementById('genero')?.value;
-                const valorEditora = document.getElementById('editora')?.value;
+                const valorGenero = (_a = document.getElementById('genero')) === null || _a === void 0 ? void 0 : _a.value;
+                const valorEditora = (_b = document.getElementById('editora')) === null || _b === void 0 ? void 0 : _b.value;
                 const dadosForm = new FormData();
-                dadosForm.append('titulo', document.getElementById('titulo')?.value.trim() || '');
-                dadosForm.append('numero_paginas', document.getElementById('paginas')?.value.trim() || '0');
-                dadosForm.append('isbn', document.getElementById('isbn')?.value.trim() || '');
-                dadosForm.append('autor', document.getElementById('autor')?.value.trim() || '');
-                dadosForm.append('ano_publicacao', document.getElementById('ano')?.value.trim() || '0');
-                dadosForm.append('resumo', document.getElementById('resumo')?.value.trim() || '');
+                dadosForm.append('titulo', ((_c = document.getElementById('titulo')) === null || _c === void 0 ? void 0 : _c.value.trim()) || '');
+                dadosForm.append('numero_paginas', ((_d = document.getElementById('paginas')) === null || _d === void 0 ? void 0 : _d.value.trim()) || '0');
+                dadosForm.append('isbn', ((_e = document.getElementById('isbn')) === null || _e === void 0 ? void 0 : _e.value.trim()) || '');
+                dadosForm.append('autor', ((_f = document.getElementById('autor')) === null || _f === void 0 ? void 0 : _f.value.trim()) || '');
+                dadosForm.append('ano_publicacao', ((_g = document.getElementById('ano')) === null || _g === void 0 ? void 0 : _g.value.trim()) || '0');
+                dadosForm.append('resumo', ((_h = document.getElementById('resumo')) === null || _h === void 0 ? void 0 : _h.value.trim()) || '');
                 if (valorGenero)
                     dadosForm.append('genero', valorGenero);
                 if (valorEditora)
@@ -594,27 +595,28 @@
                     formAdicionar.reset();
                     const inputCapaImg = document.getElementById('preview-capa-img');
                     if (inputCapaImg) {
-                        inputCapaImg.src = '../imagens/adicionarcapa.png';
+                        inputCapaImg.src = '../assets/images/adicionarcapa.png';
                     }
                 }
             });
         }
         if (formEditar) {
             formEditar.addEventListener('submit', async (e) => {
+                var _a, _b, _c, _d, _e, _f, _g, _h;
                 e.preventDefault();
                 if (!livroSelecionadoAtualmente || !livroSelecionadoAtualmente.id) {
                     ocultarModal(elementoModalEditar);
                     return;
                 }
-                const valorGenero = document.getElementById('edit-genero')?.value;
-                const valorEditora = document.getElementById('edit-editora')?.value;
+                const valorGenero = (_a = document.getElementById('edit-genero')) === null || _a === void 0 ? void 0 : _a.value;
+                const valorEditora = (_b = document.getElementById('edit-editora')) === null || _b === void 0 ? void 0 : _b.value;
                 const dadosForm = new FormData();
-                dadosForm.append('titulo', document.getElementById('edit-titulo')?.value.trim() || '');
-                dadosForm.append('numero_paginas', document.getElementById('edit-paginas')?.value.trim() || '0');
-                dadosForm.append('isbn', document.getElementById('edit-isbn')?.value.trim() || '');
-                dadosForm.append('autor', document.getElementById('edit-autor')?.value.trim() || '');
-                dadosForm.append('ano_publicacao', document.getElementById('edit-ano')?.value.trim() || '0');
-                dadosForm.append('resumo', document.getElementById('edit-resumo')?.value.trim() || '');
+                dadosForm.append('titulo', ((_c = document.getElementById('edit-titulo')) === null || _c === void 0 ? void 0 : _c.value.trim()) || '');
+                dadosForm.append('numero_paginas', ((_d = document.getElementById('edit-paginas')) === null || _d === void 0 ? void 0 : _d.value.trim()) || '0');
+                dadosForm.append('isbn', ((_e = document.getElementById('edit-isbn')) === null || _e === void 0 ? void 0 : _e.value.trim()) || '');
+                dadosForm.append('autor', ((_f = document.getElementById('edit-autor')) === null || _f === void 0 ? void 0 : _f.value.trim()) || '');
+                dadosForm.append('ano_publicacao', ((_g = document.getElementById('edit-ano')) === null || _g === void 0 ? void 0 : _g.value.trim()) || '0');
+                dadosForm.append('resumo', ((_h = document.getElementById('edit-resumo')) === null || _h === void 0 ? void 0 : _h.value.trim()) || '');
                 if (valorGenero)
                     dadosForm.append('genero', valorGenero);
                 if (valorEditora)
@@ -636,7 +638,8 @@
                 if (ficheiros && ficheiros.length > 0) {
                     const leitor = new FileReader();
                     leitor.onload = (e) => {
-                        if (e.target?.result) {
+                        var _a;
+                        if ((_a = e.target) === null || _a === void 0 ? void 0 : _a.result) {
                             imagemPreviewCapa.src = e.target.result;
                             if (containerCapaPreview)
                                 containerCapaPreview.classList.add('tem-imagem');
@@ -664,4 +667,3 @@
         inicializarAplicacao();
     }
 })();
-//# sourceMappingURL=acervo.js.map

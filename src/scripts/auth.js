@@ -8,9 +8,6 @@
         configurarFormularioRecuperarSenha();
         configurarFormularioRedefinirSenha();
     });
-    /**
-     * Exibe caixa de aviso (erro ou sucesso) no topo do formulário
-     */
     function mostrarMensagem(form, texto, eSucesso = false) {
         let caixaMensagem = form.querySelector('.caixa-feedback');
         if (!caixaMensagem) {
@@ -34,7 +31,7 @@
         botoesOlho.forEach((botao) => {
             botao.addEventListener('click', () => {
                 const container = botao.closest('.input-container');
-                const input = container?.querySelector('input');
+                const input = container === null || container === void 0 ? void 0 : container.querySelector('input');
                 if (input) {
                     const tipoAtual = input.getAttribute('type');
                     input.setAttribute('type', tipoAtual === 'password' ? 'text' : 'password');
@@ -42,9 +39,6 @@
             });
         });
     }
-    /**
-     * 1. Login -> POST /auth/token/
-     */
     function configurarFormularioLogin() {
         const form = document.getElementById('form-login');
         if (!form)
@@ -54,8 +48,8 @@
             limparMensagem(form);
             const emailInput = document.getElementById('email');
             const senhaInput = document.getElementById('senha');
-            const email = emailInput?.value.trim() || '';
-            const senha = senhaInput?.value || '';
+            const email = (emailInput === null || emailInput === void 0 ? void 0 : emailInput.value.trim()) || '';
+            const senha = (senhaInput === null || senhaInput === void 0 ? void 0 : senhaInput.value) || '';
             if (!email || !senha) {
                 mostrarMensagem(form, 'Por favor, preencha o e-mail e a senha.');
                 return;
@@ -72,7 +66,7 @@
                     localStorage.setItem('refresh_token', dados.refresh);
                     mostrarMensagem(form, 'Login efetuado! Entrando no acervo...', true);
                     setTimeout(() => {
-                        window.location.replace('./acervo.html');
+                        window.location.replace('./src/pages/acervo.html');
                     }, 600);
                 }
                 else {
@@ -85,9 +79,6 @@
             }
         });
     }
-    /**
-     * 2. Cadastro -> POST /users/
-     */
     function configurarFormularioCadastro() {
         const form = document.getElementById('form-cadastro');
         if (!form)
@@ -104,17 +95,17 @@
                 }
             }
         };
-        inputSenha?.addEventListener('input', checarSenhas);
-        inputConfirmar?.addEventListener('input', checarSenhas);
+        inputSenha === null || inputSenha === void 0 ? void 0 : inputSenha.addEventListener('input', checarSenhas);
+        inputConfirmar === null || inputConfirmar === void 0 ? void 0 : inputConfirmar.addEventListener('input', checarSenhas);
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             limparMensagem(form);
             const nome = document.getElementById('nome').value.trim();
             const email = document.getElementById('email').value.trim();
-            const senha = inputSenha?.value || '';
-            const confirmarSenha = inputConfirmar?.value || '';
+            const senha = (inputSenha === null || inputSenha === void 0 ? void 0 : inputSenha.value) || '';
+            const confirmarSenha = (inputConfirmar === null || inputConfirmar === void 0 ? void 0 : inputConfirmar.value) || '';
             if (senha !== confirmarSenha) {
-                inputConfirmar?.classList.add('input-invalido');
+                inputConfirmar === null || inputConfirmar === void 0 ? void 0 : inputConfirmar.classList.add('input-invalido');
                 mostrarMensagem(form, 'As senhas não coincidem!');
                 return;
             }
@@ -137,7 +128,7 @@
                 if (resposta.ok || resposta.status === 201) {
                     mostrarMensagem(form, 'Cadastro realizado com sucesso! Redirecionando para o login...', true);
                     setTimeout(() => {
-                        window.location.replace('./index.html');
+                        window.location.replace('../../index.html');
                     }, 1200);
                 }
                 else {
@@ -161,9 +152,6 @@
             }
         });
     }
-    /**
-     * 3. Recuperar Senha -> Verifica e-mail via GET /users/?search=... e redireciona
-     */
     function configurarFormularioRecuperarSenha() {
         const form = document.getElementById('form-recuperar');
         if (!form)
@@ -177,7 +165,6 @@
                 return;
             }
             try {
-                // Busca o usuário pelo e-mail na API
                 const resposta = await fetch(`${ENDERECO_BASE_DA_API}/users/?search=${encodeURIComponent(email)}`, {
                     method: 'GET',
                     headers: { 'Accept': 'application/json' }
@@ -185,7 +172,6 @@
                 if (resposta.ok) {
                     const dados = await resposta.json();
                     const listaUsuarios = Array.isArray(dados) ? dados : (dados.results || []);
-                    // Verifica se há correspondência exata do e-mail
                     const usuarioEncontrado = listaUsuarios.find((u) => (u.email && u.email.toLowerCase() === email.toLowerCase()) ||
                         (u.username && u.username.toLowerCase() === email.toLowerCase()));
                     if (usuarioEncontrado) {
@@ -208,9 +194,6 @@
             }
         });
     }
-    /**
-     * 4. Redefinir Senha -> Atualiza via PATCH /users/{id}/ ou /auth/password/reset/confirm/
-     */
     function configurarFormularioRedefinirSenha() {
         const form = document.getElementById('form-redefinir');
         if (!form)
@@ -235,7 +218,6 @@
             }
             try {
                 let resposta;
-                // Se houver ID do usuário na URL (veio do redirecionamento direto)
                 if (userId) {
                     resposta = await fetch(`${ENDERECO_BASE_DA_API}/users/${userId}/`, {
                         method: 'PATCH',
@@ -251,7 +233,6 @@
                     });
                 }
                 else {
-                    // Fallback para o endpoint padrão de confirmação com token
                     resposta = await fetch(`${ENDERECO_BASE_DA_API}/auth/password/reset/confirm/`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
@@ -266,7 +247,7 @@
                 if (resposta.ok || resposta.status === 200) {
                     mostrarMensagem(form, 'Senha alterada com sucesso! Redirecionando para o login...', true);
                     setTimeout(() => {
-                        window.location.replace('./index.html');
+                        window.location.replace('../../index.html');
                     }, 1200);
                 }
                 else {
@@ -280,4 +261,3 @@
         });
     }
 })();
-//# sourceMappingURL=auth.js.map
