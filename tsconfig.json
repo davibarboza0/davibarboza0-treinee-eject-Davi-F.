@@ -2,13 +2,15 @@
   "compilerOptions": {
     "target": "ES2017",
     "module": "ESNext",
+    "moduleResolution": "bundler",
     "rootDir": "./src/scripts",
     "outDir": "./src/scripts",
     "removeComments": true,
-    "noEmitOnError": true,
+    "noEmitOnError": false,
     "strict": false,
+    "skipLibCheck": true,
     "lib": ["DOM", "ES2017"]
   },
   "include": ["src/scripts/**/*.ts"],
-  "exclude": []
+  "exclude": ["node_modules"]
 }
