@@ -1,27 +1,26 @@
 (() => {
-    // 🔒 TRAVA DE AUTENTICAÇÃO IMEDIATA (Volta da pasta src/pages/ para a raiz)
     if (!localStorage.getItem('access_token')) {
         window.location.replace('../../index.html');
         return;
     }
 
-    const ENDERECO_BASE_DA_API: string = 'https://thekaapitrainee1.pythonanywhere.com';
+    const ENDERECO_BASE_DA_API: string = '/api-proxy';
 
     interface Livro {
         id?: number | string;
         titulo: string;
         autor: string;
         ano_publicacao: number | string;
-        resumo: string;
         numero_paginas: number | string;
         isbn: string;
+        resumo: string;
         genero?: number | string;
         editora?: number | string;
         editora_nome?: string;
         capa?: string;
     }
 
-    interface ItemComNome {
+    interface ItemGenerico {
         id: number | string;
         nome: string;
     }
@@ -58,7 +57,7 @@
         });
     }
 
-    function filtrarDuplicadosPorNome<T extends ItemComNome>(lista: T[]): T[] {
+    function filtrarDuplicadosPorNome(lista: ItemGenerico[]): ItemGenerico[] {
         const nomesVistos = new Set<string>();
         return lista.filter((item) => {
             if (!item || !item.nome) return false;
@@ -71,7 +70,7 @@
 
     function preencherOpcoesDoSeletor(
         elementoSeletor: HTMLSelectElement,
-        lista: ItemComNome[],
+        lista: ItemGenerico[],
         textoOpcaoPadrao: string
     ): void {
         elementoSeletor.innerHTML = `<option value="" disabled selected>${textoOpcaoPadrao}</option>`;
@@ -119,7 +118,7 @@
             });
             if (resposta.ok) {
                 const dados = await resposta.json();
-                const listaExtraida: ItemComNome[] = Array.isArray(dados) ? dados : (dados.results || []);
+                const listaExtraida: ItemGenerico[] = Array.isArray(dados) ? dados : (dados.results || []);
                 const generosUnicos = filtrarDuplicadosPorNome(listaExtraida).sort((a, b) => a.nome.localeCompare(b.nome));
                 buscarTodosOsSeletoresDeGenero().forEach((s) => {
                     const txt = s.classList.contains('select-filtro') || s.classList.contains('select-modal-filtro') ? 'Gênero' : 'Selecionar';
@@ -139,7 +138,7 @@
             });
             if (resposta.ok) {
                 const dados = await resposta.json();
-                const listaExtraida: ItemComNome[] = Array.isArray(dados) ? dados : (dados.results || []);
+                const listaExtraida: ItemGenerico[] = Array.isArray(dados) ? dados : (dados.results || []);
                 const editorasUnicas = filtrarDuplicadosPorNome(listaExtraida).sort((a, b) => a.nome.localeCompare(b.nome));
                 buscarTodosOsSeletoresDeEditora().forEach((s) => {
                     const txt = s.classList.contains('select-filtro') || s.classList.contains('select-modal-filtro') ? 'Editora' : 'Selecionar';
@@ -189,24 +188,29 @@
             card.className = `card-carrossel card-${index + 1} ${eAtivo ? 'active' : ''}`;
             card.setAttribute('data-titulo', livro.titulo);
             card.setAttribute('data-autor', `${livro.autor} – ${livro.ano_publicacao}`);
+
             if (livro.capa) {
                 card.style.backgroundImage = `url('${livro.capa}')`;
                 card.style.backgroundSize = 'cover';
                 card.style.backgroundPosition = 'center';
             }
+
             card.innerHTML = `
                 <img src="../assets/images/setad.png" alt="Seta selecionada" class="icone-seta-card img-seta-ativa" draggable="false">
                 <img src="../assets/images/setac.png" alt="Seta inativa" class="icone-seta-card img-seta-inativa" draggable="false">
             `;
+
             if (eAtivo) {
                 if (elTituloDestaque) elTituloDestaque.textContent = livro.titulo;
                 if (elAutorDestaque) elAutorDestaque.textContent = `${livro.autor} – ${livro.ano_publicacao}`;
             }
+
             card.addEventListener('click', () => {
                 if (card.classList.contains('active')) return;
                 const todosCards = containerCarrossel.querySelectorAll('.card-carrossel');
                 todosCards.forEach((c) => c.classList.remove('active'));
                 card.classList.add('active');
+
                 if (elDestaqueContainer) {
                     elDestaqueContainer.classList.add('trocando');
                     setTimeout(() => {
@@ -219,6 +223,7 @@
                     if (elAutorDestaque) elAutorDestaque.textContent = `${livro.autor} – ${livro.ano_publicacao}`;
                 }
             });
+
             containerCarrossel.appendChild(card);
         });
     }
@@ -241,23 +246,28 @@
         const containerGrelha = document.querySelector<HTMLElement>('.grid-catalogo');
         if (!containerGrelha) return;
         containerGrelha.innerHTML = '';
+
         if (livros.length === 0) {
             containerGrelha.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">Nenhum livro encontrado no acervo.</p>';
             return;
         }
+
         livros.forEach((livro, index) => {
             const cardDiv = document.createElement('div');
             cardDiv.className = 'card-catalogo';
             cardDiv.setAttribute('data-id', String(livro.id || ''));
+
             if (livro.capa) {
                 cardDiv.style.backgroundImage = `url('${livro.capa}')`;
                 cardDiv.style.backgroundSize = 'cover';
                 cardDiv.style.backgroundPosition = 'center';
             }
+
             const tituloLivro = livro.titulo || 'Título indisponível';
             const autorLivro = livro.autor || 'Autor desconhecido';
             const anoLivro = livro.ano_publicacao ? livro.ano_publicacao : '';
             const autorEAno = anoLivro ? `${autorLivro}, ${anoLivro}` : autorLivro;
+
             const overlayDiv = document.createElement('div');
             overlayDiv.className = 'card-overlay-hover';
             overlayDiv.innerHTML = `
@@ -267,6 +277,7 @@
                     <p class="overlay-autor">${autorEAno}</p>
                 </div>
             `;
+
             cardDiv.appendChild(overlayDiv);
 
             if (index === 3) {
@@ -283,6 +294,7 @@
                 `;
                 cardDiv.appendChild(btnMobile);
             }
+
             if (index === 4) {
                 const btnDesktop = document.createElement('button');
                 btnDesktop.type = 'button';
@@ -297,11 +309,13 @@
                 `;
                 cardDiv.appendChild(btnDesktop);
             }
+
             cardDiv.addEventListener('click', (ev) => {
                 const alvo = ev.target as HTMLElement;
                 if (alvo.closest('.btn-flutuante-adicionar')) return;
                 preencherEExibirModalVerMais(livro);
             });
+
             containerGrelha.appendChild(cardDiv);
         });
 
@@ -327,11 +341,14 @@
     async function carregarCatalogoDeLivros(pagina: number = 1): Promise<void> {
         paginaAtual = pagina;
         atualizarPaginacaoUI(pagina);
+
         const seletoresGenero = buscarTodosOsSeletoresDeGenero();
         const seletoresEditora = buscarTodosOsSeletoresDeEditora();
+
         const generoId = seletoresGenero.find((s) => s.value !== '')?.value || '';
         const editoraId = seletoresEditora.find((s) => s.value !== '')?.value || '';
-        const termoBusca = (document.querySelector('.input-busca') as HTMLInputElement | null)?.value.trim() || '';
+        const termoBusca = (document.querySelector<HTMLInputElement>('.input-busca')?.value.trim()) || '';
+
         try {
             const parametros = new URLSearchParams();
             parametros.append('page', String(pagina));
@@ -343,6 +360,7 @@
                 method: 'GET',
                 headers: obterHeadersComToken()
             });
+
             if (resposta.ok) {
                 const dados = await resposta.json();
                 const resultados: Livro[] = Array.isArray(dados) ? dados : (dados.results || []);
@@ -360,6 +378,7 @@
 
     function preencherEExibirModalVerMais(livro: Livro): void {
         livroSelecionadoAtualmente = livro;
+
         const elTitulo = document.querySelector<HTMLElement>('.ver-mais-titulo');
         const elAutorAno = document.querySelector<HTMLElement>('.ver-mais-autor');
         const elResumo = document.querySelector<HTMLElement>('.ver-mais-resumo');
@@ -371,9 +390,11 @@
         if (elAutorAno) elAutorAno.textContent = `${livro.autor}, ${livro.ano_publicacao}`;
         if (elResumo) elResumo.textContent = livro.resumo;
         if (elPaginas) elPaginas.textContent = `páginas: ${livro.numero_paginas}`;
+
         const nomeEditora = livro.editora_nome || (typeof livro.editora === 'string' ? livro.editora : 'Editora não informada');
         if (elEditora) elEditora.textContent = nomeEditora;
         if (elCapa && livro.capa) elCapa.src = livro.capa;
+
         exibirModal(document.getElementById('modal-ver-mais'));
     }
 
@@ -404,6 +425,7 @@
                 headers: obterHeadersComToken(),
                 body: dadosFormulario
             });
+
             if (resposta.ok || resposta.status === 201) {
                 alert('Livro cadastrado com sucesso!');
                 await carregarCatalogoDeLivros(1);
@@ -412,7 +434,7 @@
             } else {
                 const dadosErro = await resposta.json().catch(() => ({}));
                 const detalheErro = Object.entries(dadosErro)
-                    .map(([campo, mensagens]) => `${campo}: ${Array.isArray(mensagens) ? mensagens.join(', ') : (mensagens as string)}`)
+                    .map(([campo, mensagens]) => `${campo}: ${Array.isArray(mensagens) ? mensagens.join(', ') : mensagens}`)
                     .join('\n');
                 alert(`Erro ${resposta.status} ao cadastrar livro:\n\n${detalheErro || 'Verifique se os dados estão corretos.'}`);
             }
@@ -430,6 +452,7 @@
                 headers: obterHeadersComToken(),
                 body: dadosAtualizados
             });
+
             if (resposta.ok) {
                 alert('Livro atualizado com sucesso!');
                 await carregarCatalogoDeLivros(paginaAtual);
@@ -438,7 +461,7 @@
             } else {
                 const dadosErro = await resposta.json().catch(() => ({}));
                 const detalheErro = Object.entries(dadosErro)
-                    .map(([campo, mensagens]) => `${campo}: ${Array.isArray(mensagens) ? mensagens.join(', ') : (mensagens as string)}`)
+                    .map(([campo, mensagens]) => `${campo}: ${Array.isArray(mensagens) ? mensagens.join(', ') : mensagens}`)
                     .join('\n');
                 alert(`Erro ${resposta.status} ao atualizar livro:\n\n${detalheErro || 'Verifique os dados informados.'}`);
             }
@@ -451,11 +474,13 @@
 
     async function deletarLivro(idLivro: number | string): Promise<boolean> {
         if (!confirm('Tem certeza de que deseja excluir este livro?')) return false;
+
         try {
             const resposta = await fetch(`${ENDERECO_BASE_DA_API}/livros/${idLivro}/`, {
                 method: 'DELETE',
                 headers: obterHeadersComToken()
             });
+
             if (resposta.ok || resposta.status === 204) {
                 alert('Livro excluído com sucesso!');
                 await carregarCatalogoDeLivros(paginaAtual);
@@ -477,19 +502,22 @@
         const elementoModalEditar = document.getElementById('modal-editar');
         const elementoModalFiltroMobile = document.getElementById('modal-filtro-mobile');
 
-        document.addEventListener('click', async (e: MouseEvent) => {
+        document.addEventListener('click', async (e: Event) => {
             const alvo = e.target as HTMLElement;
+
             if (alvo.closest('#btn-logout, .link-logout, .link-overlay-usuario')) {
                 e.preventDefault();
                 realizarLogout();
                 return;
             }
+
             if (alvo.closest('.btn-flutuante-adicionar')) {
                 e.preventDefault();
                 e.stopPropagation();
                 exibirModal(elementoModalAdicionar);
                 return;
             }
+
             if (alvo.closest('#btn-abrir-editar, .btn-editar-detalhe')) {
                 e.preventDefault();
                 if (livroSelecionadoAtualmente) {
@@ -499,23 +527,28 @@
                 exibirModal(elementoModalEditar);
                 return;
             }
+
             if (alvo.closest('#btn-abrir-filtro-mobile, .btn-filtro-mobile')) {
                 e.preventDefault();
                 exibirModal(elementoModalFiltroMobile);
                 return;
             }
+
             if (alvo.closest('#btn-fechar-ver-mais, .btn-fechar-modal')) {
                 ocultarModal(elementoModalVerMais);
                 return;
             }
+
             if (alvo.closest('#btn-cancelar-modal, .id-btn-cancelar-add-mobile')) {
                 ocultarModal(elementoModalAdicionar);
                 return;
             }
+
             if (alvo.closest('#btn-cancelar-modal-editar, .id-btn-cancelar-edit-mobile')) {
                 ocultarModal(elementoModalEditar);
                 return;
             }
+
             if (alvo.closest('#btn-deletar-modal, .btn-pilula-deletar')) {
                 e.preventDefault();
                 if (livroSelecionadoAtualmente && livroSelecionadoAtualmente.id) {
@@ -526,11 +559,13 @@
                 }
                 return;
             }
+
             if (alvo.closest('#btn-aplicar-filtro-mobile')) {
                 ocultarModal(elementoModalFiltroMobile);
                 carregarCatalogoDeLivros(1);
                 return;
             }
+
             if (alvo.classList.contains('modal-overlay') || alvo.classList.contains('modal-filtro-overlay')) {
                 ocultarModal(elementoModalVerMais);
                 ocultarModal(elementoModalAdicionar);
@@ -541,12 +576,14 @@
 
         const btnBuscarDesktop = document.querySelector('.btn-buscar');
         const btnBuscarIconeMobile = document.querySelector('.btn-buscar-icone');
+
         if (btnBuscarDesktop) {
             btnBuscarDesktop.addEventListener('click', (e) => {
                 e.preventDefault();
                 carregarCatalogoDeLivros(1);
             });
         }
+
         if (btnBuscarIconeMobile) {
             btnBuscarIconeMobile.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -554,7 +591,7 @@
             });
         }
 
-        const botoesPagina = document.querySelectorAll('.paginacao .page-num');
+        const botoesPagina = document.querySelectorAll<HTMLElement>('.paginacao .page-num');
         botoesPagina.forEach((btn) => {
             btn.addEventListener('click', () => {
                 const num = Number(btn.textContent?.trim());
@@ -569,7 +606,7 @@
         const formEditar = document.getElementById('form-editar-material') as HTMLFormElement | null;
 
         if (formAdicionar) {
-            formAdicionar.addEventListener('submit', async (e: Event) => {
+            formAdicionar.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const inputCapa = document.getElementById('input-capa') as HTMLInputElement | null;
                 const valorGenero = (document.getElementById('genero') as HTMLSelectElement | null)?.value;
@@ -603,12 +640,13 @@
         }
 
         if (formEditar) {
-            formEditar.addEventListener('submit', async (e: Event) => {
+            formEditar.addEventListener('submit', async (e) => {
                 e.preventDefault();
                 if (!livroSelecionadoAtualmente || !livroSelecionadoAtualmente.id) {
                     ocultarModal(elementoModalEditar);
                     return;
                 }
+
                 const valorGenero = (document.getElementById('edit-genero') as HTMLSelectElement | null)?.value;
                 const valorEditora = (document.getElementById('edit-editora') as HTMLSelectElement | null)?.value;
 
@@ -634,13 +672,14 @@
     function configurarPreviewDeCapa(): void {
         const campoDeEntradaCapa = document.getElementById('input-capa') as HTMLInputElement | null;
         const imagemPreviewCapa = document.getElementById('preview-capa-img') as HTMLImageElement | null;
-        const containerCapaPreview = document.querySelector('.caixa-capa-preview');
+        const containerCapaPreview = document.querySelector<HTMLElement>('.caixa-capa-preview');
+
         if (campoDeEntradaCapa && imagemPreviewCapa) {
             campoDeEntradaCapa.addEventListener('change', () => {
                 const ficheiros = campoDeEntradaCapa.files;
                 if (ficheiros && ficheiros.length > 0) {
                     const leitor = new FileReader();
-                    leitor.onload = (e: ProgressEvent<FileReader>) => {
+                    leitor.onload = (e) => {
                         if (e.target?.result) {
                             imagemPreviewCapa.src = e.target.result as string;
                             if (containerCapaPreview) containerCapaPreview.classList.add('tem-imagem');

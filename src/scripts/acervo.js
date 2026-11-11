@@ -4,7 +4,7 @@
         window.location.replace('../../index.html');
         return;
     }
-    const ENDERECO_BASE_DA_API = 'https://thekaapitrainee1.pythonanywhere.com';
+    const ENDERECO_BASE_DA_API = '/api-proxy';
     let livroSelecionadoAtualmente = null;
     let paginaAtual = 1;
     function obterHeadersComToken() {

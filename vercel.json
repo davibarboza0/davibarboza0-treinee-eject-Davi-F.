@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/api-proxy/:path*",
-      "destination": "https://thekaapitrainee1.pythonanywhere.com/:path*"
+      "destination": "https://thekapitrainee.pythonanywhere.com/:path*"
     }
   ]
 }
