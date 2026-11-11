@@ -1,5 +1,5 @@
 (() => {
-    const ENDERECO_BASE_DA_API: string = '/api-proxy';
+    const ENDERECO_BASE_DA_API: string = 'https://thekapitrainee.pythonanywhere.com';
 
     interface UsuarioResponse {
         id: number | string;
@@ -15,9 +15,6 @@
         configurarFormularioRedefinirSenha();
     });
 
-    /**
-     * Exibe caixa de aviso (erro ou sucesso) no topo do formulário
-     */
     function mostrarMensagem(form: HTMLFormElement, texto: string, eSucesso: boolean = false): void {
         let caixaMensagem = form.querySelector<HTMLElement>('.caixa-feedback');
         if (!caixaMensagem) {
@@ -52,9 +49,6 @@
         });
     }
 
-    /**
-     * 1. Login -> POST /api-proxy/auth/token/
-     */
     function configurarFormularioLogin(): void {
         const form = document.getElementById('form-login') as HTMLFormElement | null;
         if (!form) return;
@@ -98,9 +92,6 @@
         });
     }
 
-    /**
-     * 2. Cadastro -> POST /api-proxy/users/
-     */
     function configurarFormularioCadastro(): void {
         const form = document.getElementById('form-cadastro') as HTMLFormElement | null;
         if (!form) return;
@@ -125,8 +116,10 @@
             e.preventDefault();
             limparMensagem(form);
 
-            const nome = (document.getElementById('nome') as HTMLInputElement).value.trim();
-            const email = (document.getElementById('email') as HTMLInputElement).value.trim();
+            const nomeInput = document.getElementById('nome') as HTMLInputElement | null;
+            const emailInput = document.getElementById('email') as HTMLInputElement | null;
+            const nome = nomeInput?.value.trim() || '';
+            const email = emailInput?.value.trim() || '';
             const senha = inputSenha?.value || '';
             const confirmarSenha = inputConfirmar?.value || '';
 
@@ -163,7 +156,7 @@
                     const erroDados = await resposta.json().catch(() => ({}));
                     const mensagensErro = Object.entries(erroDados)
                         .map(([campo, msgs]) => {
-                            const textoMsgs = Array.isArray(msgs) ? msgs.join(', ') : (msgs as string);
+                            const textoMsgs = Array.isArray(msgs) ? msgs.join(', ') : String(msgs);
                             if (campo === 'username' || campo === 'email') return 'Este e-mail já está em uso.';
                             if (campo === 'password') return `Senha: ${textoMsgs}`;
                             return `${campo}: ${textoMsgs}`;
@@ -178,9 +171,6 @@
         });
     }
 
-    /**
-     * 3. Recuperar Senha -> GET /api-proxy/users/?search=...
-     */
     function configurarFormularioRecuperarSenha(): void {
         const form = document.getElementById('form-recuperar') as HTMLFormElement | null;
         if (!form) return;
@@ -189,7 +179,8 @@
             e.preventDefault();
             limparMensagem(form);
 
-            const email = (document.getElementById('email') as HTMLInputElement).value.trim();
+            const emailInput = document.getElementById('email') as HTMLInputElement | null;
+            const email = emailInput?.value.trim() || '';
             if (!email) {
                 mostrarMensagem(form, 'Por favor, digite o seu e-mail.');
                 return;
@@ -205,8 +196,11 @@
                     const dados = await resposta.json();
                     const listaUsuarios: UsuarioResponse[] = Array.isArray(dados) ? dados : (dados.results || []);
 
-                    const usuarioEncontrado = listaUsuarios.find((u) => (u.email && u.email.toLowerCase() === email.toLowerCase()) ||
-                        (u.username && u.username.toLowerCase() === email.toLowerCase()));
+                    const usuarioEncontrado = listaUsuarios.find(
+                        (u) =>
+                            (u.email && u.email.toLowerCase() === email.toLowerCase()) ||
+                            (u.username && u.username.toLowerCase() === email.toLowerCase())
+                    );
 
                     if (usuarioEncontrado) {
                         mostrarMensagem(form, 'E-mail encontrado! Redirecionando para redefinição...', true);
@@ -226,9 +220,6 @@
         });
     }
 
-    /**
-     * 4. Redefinir Senha -> PATCH /api-proxy/users/{id}/ ou POST /api-proxy/auth/password/reset/confirm/
-     */
     function configurarFormularioRedefinirSenha(): void {
         const form = document.getElementById('form-redefinir') as HTMLFormElement | null;
         if (!form) return;
@@ -243,8 +234,10 @@
             e.preventDefault();
             limparMensagem(form);
 
-            const novaSenha = (document.getElementById('nova-senha') as HTMLInputElement).value;
-            const confirmarSenha = (document.getElementById('confirmar-senha') as HTMLInputElement).value;
+            const novaSenhaInput = document.getElementById('nova-senha') as HTMLInputElement | null;
+            const confirmarSenhaInput = document.getElementById('confirmar-senha') as HTMLInputElement | null;
+            const novaSenha = novaSenhaInput?.value || '';
+            const confirmarSenha = confirmarSenhaInput?.value || '';
 
             if (novaSenha !== confirmarSenha) {
                 mostrarMensagem(form, 'As senhas não coincidem!');

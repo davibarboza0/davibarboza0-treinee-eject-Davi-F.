@@ -4,7 +4,7 @@
         return;
     }
 
-    const ENDERECO_BASE_DA_API: string = '/api-proxy';
+    const ENDERECO_BASE_DA_API: string = 'https://thekapitrainee.pythonanywhere.com';
 
     interface Livro {
         id?: number | string;

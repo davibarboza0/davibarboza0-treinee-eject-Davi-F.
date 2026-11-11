@@ -1,6 +1,6 @@
 "use strict";
 (() => {
-    const ENDERECO_BASE_DA_API = '/api-proxy';
+    const ENDERECO_BASE_DA_API = 'https://thekapitrainee.pythonanywhere.com';
     document.addEventListener('DOMContentLoaded', () => {
         configurarBotoesOlho();
         configurarFormularioLogin();
@@ -100,8 +100,10 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             limparMensagem(form);
-            const nome = document.getElementById('nome').value.trim();
-            const email = document.getElementById('email').value.trim();
+            const nomeInput = document.getElementById('nome');
+            const emailInput = document.getElementById('email');
+            const nome = (nomeInput === null || nomeInput === void 0 ? void 0 : nomeInput.value.trim()) || '';
+            const email = (emailInput === null || emailInput === void 0 ? void 0 : emailInput.value.trim()) || '';
             const senha = (inputSenha === null || inputSenha === void 0 ? void 0 : inputSenha.value) || '';
             const confirmarSenha = (inputConfirmar === null || inputConfirmar === void 0 ? void 0 : inputConfirmar.value) || '';
             if (senha !== confirmarSenha) {
@@ -135,7 +137,7 @@
                     const erroDados = await resposta.json().catch(() => ({}));
                     const mensagensErro = Object.entries(erroDados)
                         .map(([campo, msgs]) => {
-                        const textoMsgs = Array.isArray(msgs) ? msgs.join(', ') : msgs;
+                        const textoMsgs = Array.isArray(msgs) ? msgs.join(', ') : String(msgs);
                         if (campo === 'username' || campo === 'email')
                             return 'Este e-mail já está em uso.';
                         if (campo === 'password')
@@ -159,7 +161,8 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             limparMensagem(form);
-            const email = document.getElementById('email').value.trim();
+            const emailInput = document.getElementById('email');
+            const email = (emailInput === null || emailInput === void 0 ? void 0 : emailInput.value.trim()) || '';
             if (!email) {
                 mostrarMensagem(form, 'Por favor, digite o seu e-mail.');
                 return;
@@ -206,8 +209,10 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             limparMensagem(form);
-            const novaSenha = document.getElementById('nova-senha').value;
-            const confirmarSenha = document.getElementById('confirmar-senha').value;
+            const novaSenhaInput = document.getElementById('nova-senha');
+            const confirmarSenhaInput = document.getElementById('confirmar-senha');
+            const novaSenha = (novaSenhaInput === null || novaSenhaInput === void 0 ? void 0 : novaSenhaInput.value) || '';
+            const confirmarSenha = (confirmarSenhaInput === null || confirmarSenhaInput === void 0 ? void 0 : confirmarSenhaInput.value) || '';
             if (novaSenha !== confirmarSenha) {
                 mostrarMensagem(form, 'As senhas não coincidem!');
                 return;
