@@ -87,6 +87,16 @@ img {
     height: 100%;
     display: block;
     cursor: pointer;
+    border-radius: 999px;
+    transition: background-color 0.3s ease;
+}
+
+.link-nav:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.link-nav:active {
+    background-color: rgba(255, 255, 255, 0.16);
 }
 
 .link-acervo {
@@ -104,7 +114,7 @@ img {
 }
 
 /* ==========================================================================
-   SEÇÕES DE CONTEÚDO (DESKTOP ORIGINAL)
+   SEÇÕES DE CONTEÚDO (DESKTOP)
    ========================================================================== */
 
 .secao-objetivos {
@@ -119,14 +129,6 @@ img {
     height: auto;
     display: block;
     object-fit: cover;
-}
-
-.objetivos-desktop {
-    display: block;
-}
-
-.objetivos-mobile-container {
-    display: none;
 }
 
 .conteudo-principal {
@@ -148,6 +150,12 @@ img {
     display: block;
     object-fit: cover;
     border-radius: 24px;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.imagem-historia:hover {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 8px 16px rgba(129, 1, 58, 0.1));
 }
 
 .historia-desktop {
@@ -188,16 +196,7 @@ img {
     object-fit: contain;
 }
 
-.imagem-valor-clicavel {
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.imagem-valor-clicavel:hover {
-    transform: scale(1.03);
-}
-
-/* EQUIPE DESKTOP (ORIGINAL) */
+/* EQUIPE DESKTOP */
 .secao-equipe {
     margin-bottom: 40px;
 }
@@ -221,13 +220,42 @@ img {
     object-fit: contain;
 }
 
+/* ==========================================================================
+   TRANSIÇÃO SUAVE E LENTA NOS CARDS CLICÁVEIS
+   ========================================================================== */
+
+.imagem-valor-clicavel,
 .imagem-equipe-clicavel {
     cursor: pointer;
-    transition: transform 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    opacity: 1;
+    transition:
+        opacity 0.3s ease-in-out,
+        transform 0.35s ease,
+        filter 0.35s ease;
 }
 
+.imagem-valor-clicavel:hover,
 .imagem-equipe-clicavel:hover {
-    transform: scale(1.03);
+    transform: translateY(-3px);
+    filter: drop-shadow(0 8px 16px rgba(129, 1, 58, 0.12));
+}
+
+.imagem-valor-clicavel:active,
+.imagem-equipe-clicavel:active {
+    transform: scale(0.985);
+}
+
+/* Fade suave durante a troca da imagem */
+.imagem-valor-clicavel.trocando,
+.imagem-equipe-clicavel.trocando {
+    opacity: 0.15;
+}
+
+/* Destaque discreto enquanto o card está no estado ativo */
+.imagem-valor-clicavel.ativo,
+.imagem-equipe-clicavel.ativo {
+    filter: drop-shadow(0 10px 20px rgba(191, 2, 89, 0.18));
 }
 
 /* ==========================================================================
@@ -270,10 +298,12 @@ img {
     display: flex;
     align-items: center;
     gap: 10px;
+    transition: color 0.3s ease;
 }
 
 .coluna-rodape a:hover {
     text-decoration: underline;
+    color: var(--amarelo-destaque);
 }
 
 .brand-coluna {
@@ -355,6 +385,12 @@ img {
         top: 0;
         height: 100%;
         display: block;
+        border-radius: 999px;
+        transition: background-color 0.3s ease;
+    }
+
+    .link-nav-mob:active {
+        background-color: rgba(255, 255, 255, 0.16);
     }
 
     .link-acervo-mob {
@@ -405,32 +441,36 @@ img {
         text-align: left;
     }
 
-    /* SEÇÃO OBJETIVOS MOBILE */
+    /* SEÇÃO OBJETIVOS MOBILE (IMAGEM DO PC COM ROLAGEM E ARRASTE DO MOUSE) */
     .secao-objetivos {
-        padding: 20px 0 10px 0;
+        width: 100%;
+        padding: 20px 0 10px 16px;
         display: flex;
-        justify-content: center;
-    }
-
-    .objetivos-desktop {
-        display: none !important;
-    }
-
-    .objetivos-mobile-container {
-        display: flex !important;
-        justify-content: center;
-        width: 100%;
-        padding: 0 16px;
+        align-items: center;
+        justify-content: flex-start;
         overflow-x: auto;
+        overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
+        cursor: grab;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
     }
 
-    .svg-objetivos-mobile {
-        width: 100%;
-        max-width: 377px;
-        min-width: 300px;
-        height: auto;
+    .secao-objetivos::-webkit-scrollbar {
+        display: none;
+    }
+
+    .secao-objetivos.arrastando {
+        cursor: grabbing;
+    }
+
+    .imagem-objetivos {
+        width: auto;
+        max-width: none;
+        height: 48px;
         display: block;
+        object-fit: contain;
+        padding-right: 16px;
     }
 
     .conteudo-principal {
