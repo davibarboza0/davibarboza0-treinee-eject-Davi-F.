@@ -21,15 +21,9 @@
             </div>
         </div>
 
-        <!-- Wrapper e Mapeamento para Mobile -->
-        <div class="header-wrapper-mobile">
+        <!-- Wrapper para Mobile (abre o seletor de páginas ao tocar) -->
+        <div class="header-wrapper-mobile" id="header-mobile-trigger" role="button" tabindex="0" aria-label="Abrir seleção de páginas">
             <img src="../assets/images/cabecalhoacervo.png" alt="Cabeçalho TheKa Acervo Mobile" class="cabecalho-mobile" draggable="false">
-            <div class="nav-overlay-mobile">
-                <a href="./acervo.html" class="link-overlay-logo" title="Acervo / Início"></a>
-                <a href="./acervo.html" class="link-overlay-acervo" title="Acervo"></a>
-                <a href="./sobrenos.html" class="link-overlay-sobrenos" title="Sobre nós"></a>
-                <a href="../../index.html" class="link-overlay-usuario" title="Perfil do usuário"></a>
-            </div>
         </div>
     </header>
 
@@ -415,7 +409,7 @@
                         
                         <div class="coluna-capa">
                             <div class="caixa-capa-preview">
-                                <img src="../assets/images/adicionarcapa.png" alt="Capa do material" class="img-adicionar-capa" draggable="false">
+                                <img src="../assets/images/adicionarcapa.png" alt="Capa do material" class="img-adicionar-capa" id="preview-edit-capa-img" draggable="false">
                             </div>
                         </div>
 
@@ -499,7 +493,7 @@
 
                     <div class="modal-botoes-editar-mobile-container">
                         <div class="botoes-linha-superior-mobile">
-                            <button type="button" class="btn-pilula-solida btn-pilula-deletar">
+                            <button type="button" id="btn-deletar-modal-mobile" class="btn-pilula-solida btn-pilula-deletar">
                                 <span>Deletar</span>
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
                                     <polyline points="3 6 5 6 21 6"></polyline>
@@ -602,6 +596,42 @@
                     </svg>
                 </button>
             </div>
+        </div>
+    </div>
+
+    <!-- MENU DE NAVEGAÇÃO MOBILE (ESTILO FILTRO) -->
+    <div id="modal-nav-mobile" class="modal-nav-overlay hidden" aria-hidden="true">
+        <div class="modal-nav-card" role="dialog" aria-label="Selecionar página">
+            <div class="modal-nav-header">
+                <h2 class="modal-nav-titulo">Páginas</h2>
+                <button type="button" id="btn-fechar-nav-mobile" class="btn-fechar-nav-mobile" aria-label="Fechar menu">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <nav class="modal-nav-opcoes">
+                <a href="./acervo.html" class="opcao-nav-pilula ativo">
+                    <span>Acervo</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+                <a href="./sobrenos.html" class="opcao-nav-pilula">
+                    <span>Sobre nós</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+                <a href="../../index.html" class="opcao-nav-pilula">
+                    <span>Início / Perfil</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+            </nav>
         </div>
     </div>
 

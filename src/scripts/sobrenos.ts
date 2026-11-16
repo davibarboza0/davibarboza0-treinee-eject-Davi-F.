@@ -68,9 +68,54 @@
         containerObjetivos.addEventListener('mouseleave', finalizarArraste);
     }
 
+    function configurarMenuNavMobile(): void {
+        const triggerHeader = document.getElementById('header-mobile-trigger');
+        const modalNav = document.getElementById('modal-nav-mobile');
+        const btnFechar = document.getElementById('btn-fechar-nav-mobile');
+
+        if (!triggerHeader || !modalNav) return;
+
+        const abrirMenu = (): void => {
+            modalNav.classList.remove('hidden');
+            modalNav.setAttribute('aria-hidden', 'false');
+        };
+
+        const fecharMenu = (): void => {
+            modalNav.classList.add('hidden');
+            modalNav.setAttribute('aria-hidden', 'true');
+        };
+
+        triggerHeader.addEventListener('click', (e: Event) => {
+            e.preventDefault();
+            abrirMenu();
+        });
+
+        triggerHeader.addEventListener('keydown', (e: KeyboardEvent) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                abrirMenu();
+            }
+        });
+
+        btnFechar?.addEventListener('click', fecharMenu);
+
+        modalNav.addEventListener('click', (e: MouseEvent) => {
+            if (e.target === modalNav) {
+                fecharMenu();
+            }
+        });
+
+        document.addEventListener('keydown', (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && !modalNav.classList.contains('hidden')) {
+                fecharMenu();
+            }
+        });
+    }
+
     function inicializarSobreNos(): void {
         configurarCardsAnimados();
         configurarArrasteObjetivos();
+        configurarMenuNavMobile();
     }
 
     if (document.readyState === 'loading') {

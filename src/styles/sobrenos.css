@@ -113,6 +113,10 @@ img {
     display: none;
 }
 
+.modal-nav-overlay {
+    display: none;
+}
+
 /* ==========================================================================
    SEÇÕES DE CONTEÚDO (DESKTOP)
    ========================================================================== */
@@ -372,35 +376,14 @@ img {
         display: flex;
         justify-content: center;
         padding: 0 16px;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
     }
 
     .svg-navbar-top {
         width: 100%;
         height: auto;
         display: block;
-    }
-
-    .link-nav-mob {
-        position: absolute;
-        top: 0;
-        height: 100%;
-        display: block;
-        border-radius: 999px;
-        transition: background-color 0.3s ease;
-    }
-
-    .link-nav-mob:active {
-        background-color: rgba(255, 255, 255, 0.16);
-    }
-
-    .link-acervo-mob {
-        left: 0%;
-        width: 50%;
-    }
-
-    .link-sobrenos-mob {
-        left: 50%;
-        width: 50%;
     }
 
     .ilustracao-mobile-container {
@@ -439,6 +422,105 @@ img {
         line-height: 1.45;
         font-weight: 400;
         text-align: left;
+    }
+
+    /* MENU DE NAVEGAÇÃO MOBILE (ESTILO FILTRO) */
+    .modal-nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.45);
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 90px 20px 20px 20px;
+        z-index: 99999;
+    }
+
+    .modal-nav-overlay.hidden {
+        display: none !important;
+    }
+
+    .modal-nav-card {
+        background-color: var(--branco);
+        border-radius: 28px;
+        padding: 24px 22px;
+        width: 100%;
+        max-width: 320px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        animation: abrirMenuNavMobile 0.22s ease-out;
+    }
+
+    @keyframes abrirMenuNavMobile {
+        from {
+            opacity: 0;
+            transform: translateY(-10px) scale(0.97);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .modal-nav-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 18px;
+    }
+
+    .modal-nav-titulo {
+        font-size: 26px;
+        font-weight: 800;
+        color: var(--vinho-principal);
+    }
+
+    .btn-fechar-nav-mobile {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1.5px solid var(--vinho-principal);
+        background-color: var(--branco);
+        color: var(--vinho-principal);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .modal-nav-opcoes {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .opcao-nav-pilula {
+        width: 100%;
+        border: 2px solid var(--vinho-principal);
+        border-radius: 50px;
+        padding: 12px 20px;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--vinho-principal);
+        background-color: var(--branco);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    }
+
+    .opcao-nav-pilula.ativo {
+        background-color: var(--vinho-principal);
+        color: var(--branco);
+    }
+
+    .opcao-nav-pilula:active {
+        transform: scale(0.98);
+        background-color: var(--vinho-principal);
+        color: var(--branco);
     }
 
     /* SEÇÃO OBJETIVOS MOBILE (IMAGEM DO PC COM ROLAGEM E ARRASTE DO MOUSE) */

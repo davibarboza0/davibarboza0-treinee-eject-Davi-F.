@@ -58,9 +58,46 @@
         containerObjetivos.addEventListener('mouseup', finalizarArraste);
         containerObjetivos.addEventListener('mouseleave', finalizarArraste);
     }
+    function configurarMenuNavMobile() {
+        const triggerHeader = document.getElementById('header-mobile-trigger');
+        const modalNav = document.getElementById('modal-nav-mobile');
+        const btnFechar = document.getElementById('btn-fechar-nav-mobile');
+        if (!triggerHeader || !modalNav)
+            return;
+        const abrirMenu = () => {
+            modalNav.classList.remove('hidden');
+            modalNav.setAttribute('aria-hidden', 'false');
+        };
+        const fecharMenu = () => {
+            modalNav.classList.add('hidden');
+            modalNav.setAttribute('aria-hidden', 'true');
+        };
+        triggerHeader.addEventListener('click', (e) => {
+            e.preventDefault();
+            abrirMenu();
+        });
+        triggerHeader.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                abrirMenu();
+            }
+        });
+        btnFechar === null || btnFechar === void 0 ? void 0 : btnFechar.addEventListener('click', fecharMenu);
+        modalNav.addEventListener('click', (e) => {
+            if (e.target === modalNav) {
+                fecharMenu();
+            }
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modalNav.classList.contains('hidden')) {
+                fecharMenu();
+            }
+        });
+    }
     function inicializarSobreNos() {
         configurarCardsAnimados();
         configurarArrasteObjetivos();
+        configurarMenuNavMobile();
     }
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', inicializarSobreNos);

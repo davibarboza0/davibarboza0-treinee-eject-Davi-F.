@@ -24,7 +24,7 @@
         <div class="hero-wrapper-mobile">
             <div class="card-hero-mobile">
                 
-                <div class="nav-mobile-container">
+                <div class="nav-mobile-container" id="header-mobile-trigger" role="button" tabindex="0" aria-label="Abrir seleção de páginas">
                     <svg class="svg-navbar-top" width="361" height="60" viewBox="0 0 361 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip_nav_circle)">
                             <path d="M95.0186-55C95.0186-55 113.395-3.42984 79.5566 44.542C89.1885 69.9165 91.8506 94.9122 91.2803 113.47C91.2803 113.595 91.2173 113.847 91.2168 113.849H91.2803L89.6328 133.163L52.5625 127.42C52.5625 127.42 60.5469 93.5866 48.0635 68.4014C45.7823 69.8531 35.1998 71.3682 32.5381 71.5576C24.427 72.1888 16.5688 70.8636 9.4082 68.1494V126.221H-25V-48.9404H9.4082V-19.3359C28.8621-22.4289 50.2807-8.79492 61.9404 9.57324C72.9664-22.1134 62.8916-48.9404 62.8916-48.9404L95.0186-55ZM29.0967-3.25488C12.21 -3.2548-1.47923 10.4346-1.47949 27.3213C-1.47949 44.2082 12.2098 57.8984 29.0967 57.8984C45.9836 57.8984 59.6738 44.2082 59.6738 27.3213C59.6736 10.4346 45.9835-3.25488 29.0967-3.25488ZM14.415 14.749C25.9479 9.00539 43.7534 27.4991 47.5557 41.0068C41.2185 43.279 20.9417 40.5648 14.3516 35.957C8.26829 31.7279 4.78316 19.6093 14.415 14.749Z" fill="#F2F2F1"/>
@@ -45,9 +45,6 @@
                             </clipPath>
                         </defs>
                     </svg>
-
-                    <a href="./acervo.html" class="link-nav-mob link-acervo-mob" aria-label="Acervo" title="Acervo"></a>
-                    <a href="./sobrenos.html" class="link-nav-mob link-sobrenos-mob" aria-label="Sobre nós" title="Sobre nós"></a>
                 </div>
 
                 <div class="ilustracao-mobile-container">
@@ -242,6 +239,42 @@
             <p>Mockup desenvolvido por EJECT</p>
         </div>
     </footer>
+
+    <!-- MENU DE NAVEGAÇÃO MOBILE (ESTILO FILTRO) -->
+    <div id="modal-nav-mobile" class="modal-nav-overlay hidden" aria-hidden="true">
+        <div class="modal-nav-card" role="dialog" aria-label="Selecionar página">
+            <div class="modal-nav-header">
+                <h2 class="modal-nav-titulo">Páginas</h2>
+                <button type="button" id="btn-fechar-nav-mobile" class="btn-fechar-nav-mobile" aria-label="Fechar menu">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+
+            <nav class="modal-nav-opcoes">
+                <a href="./acervo.html" class="opcao-nav-pilula">
+                    <span>Acervo</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+                <a href="./sobrenos.html" class="opcao-nav-pilula ativo">
+                    <span>Sobre nós</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+                <a href="../../index.html" class="opcao-nav-pilula">
+                    <span>Início / Perfil</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+            </nav>
+        </div>
+    </div>
 
     <script src="../scripts/sobrenos.js" defer></script>
 </body>

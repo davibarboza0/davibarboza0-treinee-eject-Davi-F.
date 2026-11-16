@@ -99,7 +99,9 @@
                 const listaExtraida = Array.isArray(dados) ? dados : (dados.results || []);
                 const generosUnicos = filtrarDuplicadosPorNome(listaExtraida).sort((a, b) => a.nome.localeCompare(b.nome));
                 buscarTodosOsSeletoresDeGenero().forEach((s) => {
-                    const txt = s.classList.contains('select-filtro') || s.classList.contains('select-modal-filtro') ? 'Gênero' : 'Selecionar';
+                    const txt = s.classList.contains('select-filtro') || s.classList.contains('select-modal-filtro')
+                        ? 'Gênero'
+                        : 'Selecionar';
                     preencherOpcoesDoSeletor(s, generosUnicos, txt);
                 });
             }
@@ -119,7 +121,9 @@
                 const listaExtraida = Array.isArray(dados) ? dados : (dados.results || []);
                 const editorasUnicas = filtrarDuplicadosPorNome(listaExtraida).sort((a, b) => a.nome.localeCompare(b.nome));
                 buscarTodosOsSeletoresDeEditora().forEach((s) => {
-                    const txt = s.classList.contains('select-filtro') || s.classList.contains('select-modal-filtro') ? 'Editora' : 'Selecionar';
+                    const txt = s.classList.contains('select-filtro') || s.classList.contains('select-modal-filtro')
+                        ? 'Editora'
+                        : 'Selecionar';
                     preencherOpcoesDoSeletor(s, editorasUnicas, txt);
                 });
             }
@@ -227,7 +231,7 @@
             return;
         containerGrelha.innerHTML = '';
         if (livros.length === 0) {
-            containerGrelha.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">Nenhum livro encontrado no acervo.</p>';
+            containerGrelha.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #666666;">Nenhum livro encontrado no acervo.</p>';
             return;
         }
         livros.forEach((livro, index) => {
@@ -453,7 +457,7 @@
         if (!confirm('Tem certeza de que deseja excluir este livro?'))
             return false;
         try {
-            const resposta = await fetch(`${ENDERECO_BASE_DA_API}/livros/${idLivro}/`, {
+            const resposta = await fetch(`${ENDERECO_BASE_DA_API}/livros/${idLivro}`, {
                 method: 'DELETE',
                 headers: obterHeadersComToken()
             });
@@ -468,10 +472,46 @@
             }
         }
         catch (erro) {
-            console.error(`Erro no DELETE /livros/${idLivro}/:`, erro);
+            console.error(`Erro no DELETE /livros/${idLivro}:`, erro);
             alert('Servidor inacessível no momento.');
         }
         return false;
+    }
+    function configurarMenuNavMobile() {
+        const triggerHeader = document.getElementById('header-mobile-trigger');
+        const modalNav = document.getElementById('modal-nav-mobile');
+        const btnFechar = document.getElementById('btn-fechar-nav-mobile');
+        if (!triggerHeader || !modalNav)
+            return;
+        const abrirMenu = () => {
+            modalNav.classList.remove('hidden');
+            modalNav.setAttribute('aria-hidden', 'false');
+        };
+        const fecharMenu = () => {
+            modalNav.classList.add('hidden');
+            modalNav.setAttribute('aria-hidden', 'true');
+        };
+        triggerHeader.addEventListener('click', (e) => {
+            e.preventDefault();
+            abrirMenu();
+        });
+        triggerHeader.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                abrirMenu();
+            }
+        });
+        btnFechar === null || btnFechar === void 0 ? void 0 : btnFechar.addEventListener('click', fecharMenu);
+        modalNav.addEventListener('click', (e) => {
+            if (e.target === modalNav) {
+                fecharMenu();
+            }
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modalNav.classList.contains('hidden')) {
+                fecharMenu();
+            }
+        });
     }
     function inicializarEventosEControles() {
         const elementoModalVerMais = document.getElementById('modal-ver-mais');
@@ -641,8 +681,9 @@
                         var _a;
                         if ((_a = e.target) === null || _a === void 0 ? void 0 : _a.result) {
                             imagemPreviewCapa.src = e.target.result;
-                            if (containerCapaPreview)
+                            if (containerCapaPreview) {
                                 containerCapaPreview.classList.add('tem-imagem');
+                            }
                         }
                     };
                     leitor.readAsDataURL(ficheiros[0]);
@@ -659,6 +700,7 @@
         await carregarCatalogoDeLivros(1);
         inicializarEventosEControles();
         configurarPreviewDeCapa();
+        configurarMenuNavMobile();
     }
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', inicializarAplicacao);

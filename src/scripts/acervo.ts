@@ -119,9 +119,13 @@
             if (resposta.ok) {
                 const dados = await resposta.json();
                 const listaExtraida: ItemGenerico[] = Array.isArray(dados) ? dados : (dados.results || []);
-                const generosUnicos = filtrarDuplicadosPorNome(listaExtraida).sort((a, b) => a.nome.localeCompare(b.nome));
+                const generosUnicos = filtrarDuplicadosPorNome(listaExtraida).sort((a, b) =>
+                    a.nome.localeCompare(b.nome)
+                );
                 buscarTodosOsSeletoresDeGenero().forEach((s) => {
-                    const txt = s.classList.contains('select-filtro') || s.classList.contains('select-modal-filtro') ? 'Gênero' : 'Selecionar';
+                    const txt = s.classList.contains('select-filtro') || s.classList.contains('select-modal-filtro')
+                        ? 'Gênero'
+                        : 'Selecionar';
                     preencherOpcoesDoSeletor(s, generosUnicos, txt);
                 });
             }
@@ -139,9 +143,13 @@
             if (resposta.ok) {
                 const dados = await resposta.json();
                 const listaExtraida: ItemGenerico[] = Array.isArray(dados) ? dados : (dados.results || []);
-                const editorasUnicas = filtrarDuplicadosPorNome(listaExtraida).sort((a, b) => a.nome.localeCompare(b.nome));
+                const editorasUnicas = filtrarDuplicadosPorNome(listaExtraida).sort((a, b) =>
+                    a.nome.localeCompare(b.nome)
+                );
                 buscarTodosOsSeletoresDeEditora().forEach((s) => {
-                    const txt = s.classList.contains('select-filtro') || s.classList.contains('select-modal-filtro') ? 'Editora' : 'Selecionar';
+                    const txt = s.classList.contains('select-filtro') || s.classList.contains('select-modal-filtro')
+                        ? 'Editora'
+                        : 'Selecionar';
                     preencherOpcoesDoSeletor(s, editorasUnicas, txt);
                 });
             }
@@ -185,6 +193,7 @@
         livrosExibidos.forEach((livro, index) => {
             const card = document.createElement('div');
             const eAtivo = index === 2 || (livrosExibidos.length < 3 && index === 0);
+
             card.className = `card-carrossel card-${index + 1} ${eAtivo ? 'active' : ''}`;
             card.setAttribute('data-titulo', livro.titulo);
             card.setAttribute('data-autor', `${livro.autor} – ${livro.ano_publicacao}`);
@@ -207,6 +216,7 @@
 
             card.addEventListener('click', () => {
                 if (card.classList.contains('active')) return;
+
                 const todosCards = containerCarrossel.querySelectorAll('.card-carrossel');
                 todosCards.forEach((c) => c.classList.remove('active'));
                 card.classList.add('active');
@@ -248,7 +258,7 @@
         containerGrelha.innerHTML = '';
 
         if (livros.length === 0) {
-            containerGrelha.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">Nenhum livro encontrado no acervo.</p>';
+            containerGrelha.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #666666;">Nenhum livro encontrado no acervo.</p>';
             return;
         }
 
@@ -277,7 +287,6 @@
                     <p class="overlay-autor">${autorEAno}</p>
                 </div>
             `;
-
             cardDiv.appendChild(overlayDiv);
 
             if (index === 3) {
@@ -476,7 +485,7 @@
         if (!confirm('Tem certeza de que deseja excluir este livro?')) return false;
 
         try {
-            const resposta = await fetch(`${ENDERECO_BASE_DA_API}/livros/${idLivro}/`, {
+            const resposta = await fetch(`${ENDERECO_BASE_DA_API}/livros/${idLivro}`, {
                 method: 'DELETE',
                 headers: obterHeadersComToken()
             });
@@ -490,10 +499,54 @@
                 alert(`Erro ao deletar livro: Código ${resposta.status}`);
             }
         } catch (erro) {
-            console.error(`Erro no DELETE /livros/${idLivro}/:`, erro);
+            console.error(`Erro no DELETE /livros/${idLivro}:`, erro);
             alert('Servidor inacessível no momento.');
         }
         return false;
+    }
+
+    function configurarMenuNavMobile(): void {
+        const triggerHeader = document.getElementById('header-mobile-trigger');
+        const modalNav = document.getElementById('modal-nav-mobile');
+        const btnFechar = document.getElementById('btn-fechar-nav-mobile');
+
+        if (!triggerHeader || !modalNav) return;
+
+        const abrirMenu = (): void => {
+            modalNav.classList.remove('hidden');
+            modalNav.setAttribute('aria-hidden', 'false');
+        };
+
+        const fecharMenu = (): void => {
+            modalNav.classList.add('hidden');
+            modalNav.setAttribute('aria-hidden', 'true');
+        };
+
+        triggerHeader.addEventListener('click', (e: Event) => {
+            e.preventDefault();
+            abrirMenu();
+        });
+
+        triggerHeader.addEventListener('keydown', (e: KeyboardEvent) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                abrirMenu();
+            }
+        });
+
+        btnFechar?.addEventListener('click', fecharMenu);
+
+        modalNav.addEventListener('click', (e: MouseEvent) => {
+            if (e.target === modalNav) {
+                fecharMenu();
+            }
+        });
+
+        document.addEventListener('keydown', (e: KeyboardEvent) => {
+            if (e.key === 'Escape' && !modalNav.classList.contains('hidden')) {
+                fecharMenu();
+            }
+        });
     }
 
     function inicializarEventosEControles(): void {
@@ -622,7 +675,6 @@
 
                 if (valorGenero) dadosForm.append('genero', valorGenero);
                 if (valorEditora) dadosForm.append('editora', valorEditora);
-
                 if (inputCapa && inputCapa.files && inputCapa.files.length > 0) {
                     dadosForm.append('capa', inputCapa.files[0]);
                 }
@@ -682,7 +734,9 @@
                     leitor.onload = (e) => {
                         if (e.target?.result) {
                             imagemPreviewCapa.src = e.target.result as string;
-                            if (containerCapaPreview) containerCapaPreview.classList.add('tem-imagem');
+                            if (containerCapaPreview) {
+                                containerCapaPreview.classList.add('tem-imagem');
+                            }
                         }
                     };
                     leitor.readAsDataURL(ficheiros[0]);
@@ -697,9 +751,11 @@
             carregarListaDeEditoras(),
             carregarNovidadesDaSemana()
         ]);
+
         await carregarCatalogoDeLivros(1);
         inicializarEventosEControles();
         configurarPreviewDeCapa();
+        configurarMenuNavMobile();
     }
 
     if (document.readyState === 'loading') {
